@@ -18,9 +18,7 @@
 
     <!-- Styles / Scripts -->
     @vite('resources/css/app.css')
-
-    {{-- ? Alpine --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite('resources/js/app.js')
 
     {{-- ? FontAwesome --}}
     <script src="https://kit.fontawesome.com/19cba76c30.js" crossorigin="anonymous"></script>
@@ -49,7 +47,7 @@
         </div>
     </nav>
 
-    <section class="min-h-screen pt-28 w-full">
+    <section class="min-h-screen flex flex-col items-center justify-center pt-6 w-full">
         <div
             class="flex flex-wrap md:flex-nowrap justify-center md:justify-between gap-10 w-full px-4 md:px-15 mt-7 mb-16">
             <div class="">
@@ -68,64 +66,57 @@
                 </a>
             </div>
         </div>
-        <div class="">
-            <div x-data="{}" x-init="$nextTick(() => {
-                let ul = $refs.logos;
-                ul.insertAdjacentHTML('afterend', ul.outerHTML);
-                ul.nextSibling.setAttribute('aria-hidden', 'true');
-            })" class="w-full inline-flex flex-nowrap">
-                <ul x-ref="logos"
-                    class="flex items-center justify-center md:justify-start [&_li]:mx-3 [&_li]:shadow-3xl [&>li>div]:w-62 [&>li>div]:h-80 [&>li>div]:overflow-hidden [&>li>div>img]:object-cover animate-[infiniteScroll_40s_linear_infinite]">
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div x-data="{}" x-init="$nextTick(() => {
+            let ul = $refs.books;
+            ul.insertAdjacentHTML('afterend', ul.outerHTML);
+            ul.nextSibling.setAttribute('aria-hidden', 'true');
+        })" class="w-full inline-flex flex-nowrap">
+            <ul x-ref="books"
+                class="flex items-center justify-center md:justify-start [&_li]:mx-3 animate-[infiniteScroll_40s_linear_infinite]">
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+                <li>
+                    <div class="book-cover-display">
+                        <img
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
+                    </div>
+                </li>
+
+            </ul>
         </div>
     </section>
 
     <section class="relative min-h-screen flex items-center justify-center mx-auto px-6 md:px-15 py-8">
         <div
-            class="bg-decoration w-[35rem] h-[36rem] opacity-40 bg-secondary absolute -z-10 left-0 top-0 md:top-auto md:bottom-0">
+            class="bg-decoration w-[40vw] h-[80vh] opacity-40 bg-secondary absolute -z-10 left-0 top-0 md:top-auto md:bottom-0">
         </div>
 
         <div class="grid grid-cols-1 h-full gap-[6rem] md:grid-cols-2 items-center md:gap-12">
@@ -170,6 +161,99 @@
             </div>
         </div>
     </section>
+
+    <section class="min-h-80 h-80 bg-no-repeat bg-cover text-white"
+        style="background-image: url({{ asset('img/library-unsplash.jpg') }})">
+        <div class="flex flex-col px-8 items-center justify-center w-full h-full font-crimson text-center bg-black/60">
+            <p class="italic font-light text-3xl max-w-3xl mb-6">
+                "Satu-satunya cara untuk melakukan pekerjaan hebat adalah dengan mencintai apa
+                yang kamu lakukan."
+            </p>
+            <h5 class="font-bold text-3xl">- Steve Jobs -</h5>
+        </div>
+    </section>
+
+    <section class="flex justify-center items-center min-h-screen m-0 md:px-15 py-4 bg-[#F2F2F2]">
+        <div class="px-4">
+            <h3 class="font-playfair font-bold text-5xl text-center w-full mb-7">
+                Buku <i class="text-primary">Terbaru</i>
+            </h3>
+            <p class="font-crimson font-normal text-xl text-center w-full max-w-lg mx-auto mb-12">
+                Jelajahi koleksi terbaru perpustakaan kami dan
+                temukan bacaan yang menarik sesuai minat Anda.
+            </p>
+            <div
+                class="flex flex-wrap justify-center items-start gap-12 [&>div]:w-62 [&>div>div]:hover:scale-105 [&>div>div]:transition [&>div>div]:mb-5 [&_p]:leading-6 [&_p]:font-crimson [&_p]:font-bold [&_p]:text-xl [&_p]:text-center">
+                <div>
+                    <div class="book-cover-display new-badge">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
+                            alt="">
+                    </div>
+                    <p>A History of China</p>
+                </div>
+                <div>
+                    <div class="book-cover-display new-badge">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
+                            alt="">
+                    </div>
+                    <p>Agrobisnis Budidaya Lidah Buaya</p>
+                </div>
+                <div>
+                    <div class="book-cover-display new-badge">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
+                            alt="">
+                    </div>
+                    <p>Aku bisa jika aku berpikir bisa</p>
+                </div>
+                <div>
+                    <div class="book-cover-display new-badge">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
+                            alt="">
+                    </div>
+                    <p>Aku memilih bahagia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-custom-black">
+        <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="flex justify-center">
+                <h1 class="font-playfair text-3xl font-bold text-secondary tracking-wide">RyanLibrary</h1>
+            </div>
+
+            <p class="font-crimson font-light text-lg mx-auto mt-6 max-w-md text-center text-custom-white/70">
+                Membaca membuka wawasan dan membawa Anda ke dunia tanpa batas. Temukan inspirasi dalam setiap halaman.
+            </p>
+
+            <ul class="mt-6 flex flex-wrap text-secondary text-xl font-crimson justify-center gap-6 md:gap-8">
+                <li>
+                    <a class="hover:underline" href="#"> Log In </a>
+                </li>
+                /
+                <li>
+                    <a class="hover:underline" href="#"> Daftar </a>
+                </li>
+            </ul>
+
+            <ul class="mt-12 flex justify-center gap-4 text-custom-white [&_a]:transition [&_a]:hover:text-secondary">
+                <li>
+                    <a href="https://www.instagram.com/ryanproductions_/" rel="noreferrer" target="_blank"
+                        class="text-2xl">
+                        <span class="sr-only">Instagram</span>
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.github.com/ryanpermanaa/" rel="noreferrer" target="_blank"
+                        class="text-2xl">
+                        <span class="sr-only">Twitter</span>
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>

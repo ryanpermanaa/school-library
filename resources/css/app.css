@@ -84,3 +84,12 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+.book-cover-display {
+    @apply w-62 h-80 shadow-3xl overflow-hidden [&>img]:object-cover [&>img]:w-full relative;
+}
+
+.book-cover-display.new-badge::before {
+    content: "BARU";
+    @apply absolute right-2 top-2 py-0.5 px-2 bg-primary text-custom-white font-crimson font-semibold italic;
+}
