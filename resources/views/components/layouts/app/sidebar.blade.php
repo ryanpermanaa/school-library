@@ -16,10 +16,10 @@
             <x-app-logo />
         </a>
 
-        <flux:navlist variant="outline">
+        <flux:navlist>
             <flux:navlist.group :heading="__('Platform')" class="grid">
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate class="text-custom-white!">
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
             </flux:navlist.group>
@@ -27,21 +27,17 @@
 
         <flux:spacer />
 
-        <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
+        <flux:navlist>
+            <flux:navlist.item class="text-custom-white! hover:text-white/80!" icon="folder-git-2" href="https://github.com/ryanpermanaa/school-library"
                 target="_blank">
-                {{ __('Repository') }}
-            </flux:navlist.item>
-
-            <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
+                {{ __('Github Repository') }}
             </flux:navlist.item>
         </flux:navlist>
 
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">
             <flux:profile :name="auth()->user()-> name" :initials="auth()->user()->initials()"
-                icon-trailing="chevrons-up-down" />
+                icon-trailing="chevrons-up-down" class="text-custom-white! cursor-pointer" />
 
             <flux:menu class="w-[220px]">
                 <flux:menu.radio.group>
@@ -65,7 +61,8 @@
                 <flux:menu.separator />
 
                 <flux:menu.radio.group>
-                    <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>{{ __('Settings') }}
+                    <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>
+                        {{ __('Pengaturan') }}
                     </flux:menu.item>
                 </flux:menu.radio.group>
 
@@ -74,7 +71,7 @@
                 <form method="POST" action="{{ route('logout') }}" class="w-full">
                     @csrf
                     <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                        {{ __('Log Out') }}
+                        {{ __('Keluar Akun') }}
                     </flux:menu.item>
                 </form>
             </flux:menu>
