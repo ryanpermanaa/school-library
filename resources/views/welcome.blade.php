@@ -17,8 +17,7 @@
         rel="stylesheet">
 
     <!-- Styles / Scripts -->
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- ? FontAwesome --}}
     <script src="https://kit.fontawesome.com/19cba76c30.js" crossorigin="anonymous"></script>
@@ -148,14 +147,15 @@
                         </div>
                     </div>
                     <a class="group relative inline-flex items-center overflow-hidden border-4 border-current px-7 py-2 text-primary hover:bg-primary"
-                        href="#">
+                        href="{{ route('register') }}">
                         <span class="absolute -end-full transition-all group-hover:end-4">
                             <i class="fa-solid fa-arrow-right-long group-hover:text-custom-white"></i>
                         </span>
 
                         <span
-                            class="font-crimson font-bold text-xl transition-all group-hover:text-custom-white group-hover:me-4">Coba
-                            Sekarang</span>
+                            class="font-crimson font-bold text-xl transition-all group-hover:text-custom-white group-hover:me-4">
+                            Coba Aplikasi
+                        </span>
                     </a>
                 </div>
             </div>
@@ -228,11 +228,11 @@
 
             <ul class="mt-6 flex flex-wrap text-secondary text-xl font-crimson justify-center gap-6 md:gap-8">
                 <li>
-                    <a class="hover:underline" href="#"> Log In </a>
+                    <a class="hover:underline" href="{{ route('login') }}"> Log In </a>
                 </li>
                 /
                 <li>
-                    <a class="hover:underline" href="#"> Daftar </a>
+                    <a class="hover:underline" href="{{ route('register') }}"> Daftar </a>
                 </li>
             </ul>
 
@@ -254,6 +254,8 @@
             </ul>
         </div>
     </footer>
+
+    @livewireScripts
 </body>
 
 </html>
