@@ -31,16 +31,25 @@
                 <div class="flex shrink-0 items-center">
                     <h1 class="font-playfair text-2xl font-bold text-secondary tracking-wide">RyanLibrary</h1>
                 </div>
-                <div class="flex items-center gap-5 font-crimson text-lg font-light">
-                    <a href="{{ route('login') }}"
-                        class="border-b-4 border-transparent transition-all duration-300 hover:border-primary">
-                        Log in
-                    </a>
 
-                    <a class="rounded-sm bg-primary px-5 py-1 text-custom-white transition hover:scale-105 hover:shadow-xl"
-                        href="{{ route('register') }}">
-                        Daftar
-                    </a>
+                <div class="flex items-center gap-5 font-crimson text-lg font-light">
+                    @guest
+                        <a href="{{ route('login') }}"
+                            class="border-b-4 border-transparent transition-all duration-300 hover:border-primary">
+                            Log in
+                        </a>
+
+                        <a class="rounded-sm bg-primary px-5 py-1 text-custom-white transition hover:scale-105 hover:shadow-xl"
+                            href="{{ route('register') }}">
+                            Daftar
+                        </a>
+                    @endguest
+                    @auth
+                        <a class="rounded-sm bg-primary px-5 py-1 text-custom-white transition hover:scale-105 hover:shadow-xl"
+                            href="{{ route('dashboard') }}">
+                            Dashboard
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800">
+<body class="min-h-screen bg-custom-white dark:bg-zinc-800">
     <flux:sidebar sticky stashable class="bg-custom-black text-custom-white dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
@@ -17,10 +17,26 @@
         </a>
 
         <flux:navlist>
-            <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+            <flux:navlist.group :heading="__('Platform')" class="grid [&_div_a]:mb-1.5 [&_div_button]:mb-1.5">
+                <flux:navlist.item icon="square-3-stack-3d" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Dashboard') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="home"
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Jelajahi') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="list-bullet"
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Kategori') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="book-open"
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Koleksi Saya') }}
+                </flux:navlist.item>
+                <flux:navlist.item icon="heart"
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Favorite') }}
                 </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
@@ -37,7 +53,7 @@
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">
             <flux:profile :name="auth()->user()-> name" :initials="auth()->user()->initials()"
-                icon-trailing="chevrons-up-down" class="text-custom-white! cursor-pointer" />
+                icon-trailing="chevrons-up-down" class="text-custom-white! [&_span]:text-current! [&_span]:hover:text-current/80! [&_svg]:text-current/50! [&_svg]:hover:text-current/30! [&_div:first-child_div]:text-black [&_div:first-child_div]:dark:text-white [&_div:first-child_div]:font-extrabold cursor-pointer" />
 
             <flux:menu class="w-[220px]">
                 <flux:menu.radio.group>
