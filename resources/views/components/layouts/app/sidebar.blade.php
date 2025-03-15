@@ -22,23 +22,23 @@
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home"
+                <flux:navlist.item icon="home" :href="route('explore')" :current="request()->routeIs('explore')"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Jelajahi') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="list-bullet"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
-                    {{ __('Kategori') }}
-                </flux:navlist.item>
                 <flux:navlist.item icon="book-open"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
-                    {{ __('Koleksi Saya') }}
+                    {{ __('Buku Dipinjam') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="heart"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Favorite') }}
                 </flux:navlist.item>
-            </flux:navlist.group>
+                <flux:navlist.item icon="bell"
+                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Notifikasi') }}
+                </flux:navlist.item>
+        </flux:navlist.group>
         </flux:navlist>
 
         <flux:spacer />
