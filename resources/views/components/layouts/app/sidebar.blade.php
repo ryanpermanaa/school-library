@@ -22,7 +22,7 @@
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="home" :href="route('explore')" :current="request()->routeIs('explore')"
+                <flux:navlist.item icon="home"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Jelajahi') }}
                 </flux:navlist.item>

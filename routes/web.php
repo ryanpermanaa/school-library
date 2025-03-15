@@ -1,7 +1,6 @@
 <?php
 
-use App\Livewire\Explore;
-use App\Livewire\Settings\Appearance;
+// use App\Livewire\Explore;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
 
     //? Discovery page
-    Route::redirect('/', 'explore');
+    // Route::redirect('/', 'explore');
 
-    Route::get('explore', Explore::class)->name('explore');
+    // Route::get('explore', Explore::class)->name('explore');
 });
 
 require __DIR__ . '/auth.php';
