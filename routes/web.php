@@ -21,8 +21,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
 
     //? Discovery page
-    // Route::redirect('/', 'explore');
-
     // Route::get('explore', Explore::class)->name('explore');
 });
 
