@@ -11,5 +11,8 @@
     href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
     rel="stylesheet">
 
-@fluxAppearance
+{{-- ? Fontawesome --}}
+<script src="https://kit.fontawesome.com/19cba76c30.js" crossorigin="anonymous"></script>
+
+{{-- @fluxAppearance --}}
 @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->integer('likes_count');
-            $table->integer('favorites_count');
-            $table->boolean('is_available');
+            $table->string('cover_path');
+            $table->boolean('is_available')->default(false);
             $table->timestamps();
         });
 

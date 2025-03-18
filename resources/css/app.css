@@ -15,7 +15,7 @@
     --font-playfair: "Playfair Display", sans-serif;
     --font-crimson: "Crimson Pro", sans-serif;
 
-    --color-zinc-50: #fafafa;
+    /* --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
     --color-zinc-200: #e5e5e5;
     --color-zinc-300: #d4d4d4;
@@ -25,11 +25,11 @@
     --color-zinc-700: #404040;
     --color-zinc-800: #262626;
     --color-zinc-900: #171717;
-    --color-zinc-950: #0a0a0a;
+    --color-zinc-950: #0a0a0a; */
 
-    --color-accent: var(--color-neutral-800);
+    /* --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
-    --color-accent-foreground: var(--color-white);
+    --color-accent-foreground: var(--color-white); */
 
     --color-custom-black: #211a1d;
     --color-custom-white: #f9f5fb;
@@ -50,11 +50,11 @@
 }
 
 @layer theme {
-    /* .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
-    } */
+    .dark {
+        --color-accent: var(--color-custom-black);
+        --color-accent-content: var(--color-custom-black);
+        --color-accent-foreground: var(--color-custom-white);
+    }
 }
 
 @layer base {

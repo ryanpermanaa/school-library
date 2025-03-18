@@ -2,27 +2,29 @@
 <!-- Entire file content -->
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" class="">
 
 <head>
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-custom-white dark:bg-zinc-800">
-    <flux:sidebar sticky stashable class="bg-custom-black text-custom-white dark:border-zinc-700 dark:bg-zinc-900">
+<body class="min-h-screen bg-[#DED8E0] dark:bg-zinc-800">
+    <flux:sidebar sticky stashable class="bg-custom-black text-custom-white dark:border-zinc-700 dark:bg-zinc-900 shadow-3xl">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-        <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+        <a href="{{ route('explore') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
             <x-app-logo />
         </a>
 
         <flux:navlist>
             <flux:navlist.group :heading="__('Platform')" class="grid [&_div_a]:mb-1.5 [&_div_button]:mb-1.5">
-                <flux:navlist.item icon="square-3-stack-3d" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
-                    {{ __('Dashboard') }}
-                </flux:navlist.item>
-                <flux:navlist.item icon="home"
+                @can('dashboard-access')
+                    <flux:navlist.item icon="square-3-stack-3d" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
+                        wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                        {{ __('Dashboard') }}
+                    </flux:navlist.item>
+                @endcan
+                <flux:navlist.item icon="home" :href="route('explore')" :current="request()->routeIs('explore')"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Jelajahi') }}
                 </flux:navlist.item>

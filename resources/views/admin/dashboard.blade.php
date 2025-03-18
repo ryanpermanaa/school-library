@@ -1,10 +1,12 @@
-<x-layouts.app title="Dashboard" class="bg-custom-white">
+<x-layouts.app title="Dashboard" class="">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <div class="grid mb-4 pb-10 px-4 mx-4 rounded-3xl">
         <div class="grid grid-cols-12 gap-6">
             <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
                 <div class="col-span-12 mt-8">
-                    <div class="flex items-center h-10 intro-y">
-                        <h2 class="mr-5 text-xl font-bold truncate">Dashboard</h2>
+                    <div class="flex flex-col justify-center h-fit intro-y">
+                        <h2 class="mr-5 text-xl font-bold truncate mb-1">Dashboard</h2>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
@@ -112,7 +114,38 @@
                 <div class="col-span-12 mt-5">
                     <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
                         <div class="bg-white p-4 shadow-lg rounded-lg">
-                            <h1 class="font-bold text-base">Table</h1>
+                            <div>
+                                <div class="sm:hidden">
+                                    <label for="Tab" class="sr-only">Tab</label>
+
+                                    <select id="Tab" class="w-full rounded-md border-gray-200">
+                                        <option>Settings</option>
+                                        <option>Messages</option>
+                                        <option>Archive</option>
+                                        <option select>Notifications</option>
+                                    </select>
+                                </div>
+
+                                <div class="hidden sm:block">
+                                    <div class="border-b border-gray-200">
+                                        <nav class="-mb-px flex gap-4" aria-label="Tabs">
+                                            <a href="#"
+                                                class="inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-4 text-sm font-medium {{ request()->routeIs('') }} border-sky-500 text-sky-600"
+                                                aria-current="page">
+                                                <i class="fa-solid fa-users"></i>
+                                                Users
+                                            </a>
+                                            <a href="#"
+                                                class="inline-flex shrink-0 items-center gap-2 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
+                                                aria-current="page">
+                                                <i class="fa-solid fa-user-tie"></i>
+                                                Admins
+                                            </a>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mt-4">
                                 <div class="flex flex-col">
                                     <div class="-my-2 overflow-x-auto">
@@ -213,8 +246,6 @@
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script>
         function data() {

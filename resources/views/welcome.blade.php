@@ -46,8 +46,8 @@
                     @endguest
                     @auth
                         <a class="rounded-sm bg-primary px-5 py-1 text-custom-white transition hover:scale-105 hover:shadow-xl"
-                            href="{{ route('dashboard') }}">
-                            Dashboard
+                            href="{{ route('explore') }}">
+                            Explore
                         </a>
                     @endauth
                 </div>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'author', 'likes_count', 'favorites_count', 'is_available'];
+    protected $fillable = ['title', 'author', 'cover_path', 'likes_count', 'favorites_count', 'is_available'];
 
     public function borrowing(): BelongsTo
     {
@@ -26,8 +26,8 @@ class Book extends Model
         return $this->belongsToMany(User::class, 'book_favorites');
     }
 
-    public function categories(): HasMany
+    public function categories(): BelongsToMany
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 }
