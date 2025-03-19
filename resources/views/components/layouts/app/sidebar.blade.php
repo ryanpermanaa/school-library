@@ -2,7 +2,7 @@
 <!-- Entire file content -->
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" class="">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 
 <head>
     @include('partials.head')

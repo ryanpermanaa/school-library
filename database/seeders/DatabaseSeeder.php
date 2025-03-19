@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             'password' => 'loremipsum'
         ]);
 
-        $this->call([BookSeeder::class]);
+        // $this->call([BookSeeder::class]);
     }
 }
