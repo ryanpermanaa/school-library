@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('cover_path');
-            $table->boolean('is_available')->default(false);
+            $table->foreignId('category_id')->constrained();
+            $table->boolean('is_available');
             $table->timestamps();
         });
 
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->timestamp('created_at');
         });
 
-        Schema::create('book_favorites', function (Blueprint $table) {
+        Schema::create('book_saves', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('book_id')->constrained();

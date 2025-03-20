@@ -91,7 +91,8 @@ select:focus[data-flux-control] {
     @apply w-62 h-80 shadow-3xl overflow-hidden [&>img]:object-cover [&>img]:w-full relative;
 }
 
+.new-badge::before,
 .book-cover-display.new-badge::before {
     content: "BARU";
-    @apply absolute right-2 top-2 py-0.5 px-2 bg-primary text-custom-white font-crimson font-semibold italic shadow-2xl;
+    @apply absolute right-2 top-2 py-0.5 px-2 bg-primary text-custom-white font-crimson font-semibold italic shadow-2xl z-40;
 }

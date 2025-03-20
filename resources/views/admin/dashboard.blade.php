@@ -1,6 +1,4 @@
 <x-layouts.app title="Dashboard" class="">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
     <div class="grid mb-4 pb-10 px-4 mx-4 rounded-3xl">
         <div class="grid grid-cols-12 gap-6">
             <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">

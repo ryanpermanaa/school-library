@@ -32,9 +32,9 @@
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Buku Dipinjam') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="heart"
+                <flux:navlist.item icon="bookmark"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
-                    {{ __('Favorite') }}
+                    {{ __('Disimpan') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="bell"
                     wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
