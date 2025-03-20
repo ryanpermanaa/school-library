@@ -28,8 +28,8 @@ Route::middleware(['auth'])->group(function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     });
 
-    //? User
-    Route::get('explore', [ExploreController::class, 'index'])->name('explore');
+    Route::get('books/explore', [ExploreController::class, 'index'])->name('explore');
+    Route::view('books/search', 'books.search')->name('search');
 });
 
 require __DIR__ . '/auth.php';

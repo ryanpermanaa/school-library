@@ -17,27 +17,31 @@
         </a>
 
         <flux:navlist>
-            <flux:navlist.group :heading="__('Platform')" class="grid [&_div_a]:mb-1.5 [&_div_button]:mb-1.5">
+            <flux:navlist.group :heading="__('Platform')" class="grid">
                 @can('dashboard-access')
                     <flux:navlist.item icon="square-3-stack-3d" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
-                        wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                        wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                         {{ __('Dashboard') }}
                     </flux:navlist.item>
                 @endcan
                 <flux:navlist.item icon="home" :href="route('explore')" :current="request()->routeIs('explore')"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Jelajahi') }}
                 </flux:navlist.item>
+                <flux:navlist.item icon="magnifying-glass" :href="route('search')" :current="request()->routeIs('search')"
+                    wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    {{ __('Cari Buku') }}
+                </flux:navlist.item>
                 <flux:navlist.item icon="book-open"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Buku Dipinjam') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="bookmark"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Disimpan') }}
                 </flux:navlist.item>
                 <flux:navlist.item icon="bell"
-                    wire:navigate class="text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                    wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Notifikasi') }}
                 </flux:navlist.item>
         </flux:navlist.group>
@@ -54,7 +58,7 @@
 
         <!-- Desktop User Menu -->
         <flux:dropdown position="bottom" align="start">
-            <flux:profile :name="auth()->user()-> name" :initials="auth()->user()->initials()"
+            <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
                 icon-trailing="chevrons-up-down" class="text-custom-white! [&_span]:text-current! [&_span]:hover:text-current/80! [&_svg]:text-current/50! [&_svg]:hover:text-current/30! [&_div:first-child_div]:text-black [&_div:first-child_div]:dark:text-white [&_div:first-child_div]:font-extrabold cursor-pointer" />
 
             <flux:menu class="w-[220px]">
@@ -98,7 +102,7 @@
 
     <!-- Mobile User Menu -->
     <flux:header class="lg:hidden">
-        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+        <flux:sidebar.toggle class="lg:hidden text-black!" icon="bars-3-bottom-left" inset="left" />
 
         <flux:spacer />
 
@@ -141,6 +145,7 @@
                 </form>
             </flux:menu>
         </flux:dropdown>
+
     </flux:header>
 
     {{ $slot }}

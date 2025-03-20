@@ -24,6 +24,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Olahraga', 'text_color' => '#0288D1', 'background_color' => '#E1F5FE'],
             ['name' => 'Perjalanan', 'text_color' => '#009688', 'background_color' => '#E0F2F1'],
             ['name' => 'Spiritualitas', 'text_color' => '#FF6F00', 'background_color' => '#FFF8E1'],
+            ['name' => 'Fiksi', 'text_color' => '#6A1B9A', 'background_color' => '#F3E5F5'],
         ];
 
         foreach ($categories as $category) {

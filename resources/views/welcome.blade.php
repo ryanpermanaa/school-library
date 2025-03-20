@@ -78,7 +78,7 @@
             let ul = $refs.books;
             ul.insertAdjacentHTML('afterend', ul.outerHTML);
             ul.nextSibling.setAttribute('aria-hidden', 'true');
-        })" class="w-full inline-flex flex-nowrap">
+        })" class="w-full overflow-x-hidden inline-flex flex-nowrap">
             <ul x-ref="books"
                 class="flex items-center justify-center md:justify-start [&_li]:mx-3 animate-[infiniteScroll_40s_linear_infinite]">
                 <li>
