@@ -88,7 +88,7 @@ select:focus[data-flux-control] {
 /*? My CSS */
 
 .book-cover-display {
-    @apply w-62 h-80 shadow-3xl overflow-hidden [&>img]:object-cover [&>img]:w-full relative;
+    @apply w-56 h-80 shadow-3xl overflow-hidden [&>img]:object-cover [&>img]:w-full relative;
 }
 
 .new-badge::before,

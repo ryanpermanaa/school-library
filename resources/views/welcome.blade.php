@@ -192,30 +192,30 @@
                 temukan bacaan yang menarik sesuai minat Anda.
             </p>
             <div
-                class="flex flex-wrap justify-center items-start gap-12 [&>div]:w-62 [&>div>div]:hover:scale-105 [&>div>div]:transition [&>div>div]:mb-5 [&_p]:leading-6 [&_p]:font-crimson [&_p]:font-bold [&_p]:text-xl [&_p]:text-center">
+                class="flex flex-wrap justify-center items-start gap-4 [&>div]:w-62 [&>div>div]:hover:scale-105 [&>div>div]:transition [&>div>div]:mb-5 [&_p]:leading-6 [&_p]:font-crimson [&_p]:font-bold [&_p]:text-xl [&_p]:text-center">
                 <div>
-                    <div class="book-cover-display new-badge">
+                    <div class="mx-auto book-cover-display new-badge">
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
                             alt="">
                     </div>
                     <p>A History of China</p>
                 </div>
                 <div>
-                    <div class="book-cover-display new-badge">
+                    <div class="mx-auto book-cover-display new-badge">
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
                             alt="">
                     </div>
                     <p>Agrobisnis Budidaya Lidah Buaya</p>
                 </div>
                 <div>
-                    <div class="book-cover-display new-badge">
+                    <div class="mx-auto book-cover-display new-badge">
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
                             alt="">
                     </div>
                     <p>Aku bisa jika aku berpikir bisa</p>
                 </div>
                 <div>
-                    <div class="book-cover-display new-badge">
+                    <div class="mx-auto book-cover-display new-badge">
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
                             alt="">
                     </div>

@@ -3,6 +3,7 @@
 // use App\Livewire\Explore;
 
 use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\SearchController;
 use App\Http\Middleware\IsAdminMiddleware;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -28,8 +29,11 @@ Route::middleware(['auth'])->group(function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     });
 
-    Route::get('books/explore', [ExploreController::class, 'index'])->name('explore');
-    Route::view('books/search', 'books.search')->name('search');
+    //? Books
+    Route::group(['prefix' => 'books'], function () {
+        Route::get('explore', [ExploreController::class, 'index'])->name('explore');
+        Route::get('search', [SearchController::class, 'index'])->name('search');
+    });
 });
 
 require __DIR__ . '/auth.php';
