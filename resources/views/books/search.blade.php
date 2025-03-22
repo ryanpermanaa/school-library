@@ -4,8 +4,8 @@
         <h1 class="text-3xl font-playfair font-bold whitespace-nowrap">Pencarian Buku</h1>
     </section>
 
-    <section class="p-4 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
-        <div class="flex gap-2">
+    <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
+        <div class="flex flex-col md:flex-row gap-2 mb-5">
             <div class="flex flex-1 gap-1 w-full">
                 <div class="relative w-full rounded-sm">
                     <label for="Search" class="sr-only"> Search </label>
@@ -15,7 +15,7 @@
                 <flux:button icon="magnifying-glass"
                     class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
             </div>
-            <div class="w-fit">
+            <div class="w-full md:w-44">
                 <x-select :options="[
                     0 => 'Teknologi',
                     1 => 'Sains',
@@ -30,7 +30,7 @@
                     11 => 'Spiritualitas',
                 ]" type="multi-select" placeholder="Pilih Kategori" name="category" />
             </div>
-            <div class="w-fit">
+            <div class="w-full md:w-50">
                 <x-select :options="[
                     0 => 'Terbaru',
                     1 => 'Terlama',
@@ -38,12 +38,20 @@
                     3 => 'Terbanyak Disimpan',
                 ]" type="single-select" placeholder="Urutkan Pencarian" name="sortType" />
             </div>
-            <div class="w-fit">
+            <div class="w-full md:w-44">
                 <x-select :options="[
                     0 => 'Dipinjam',
                     1 => 'Tersedia',
                 ]" type="single-select" placeholder="Status Buku" name="sortType" />
             </div>
+        </div>
+
+        <flux:separator class="mb-5" />
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
+            @foreach ($books as $book)
+                <x-book-display :$book />
+            @endforeach
         </div>
     </section>
 

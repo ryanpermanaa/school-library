@@ -1,6 +1,6 @@
 <div x-data="@if ($type === 'single-select') singleSelect( {{ json_encode($options) }})
     @elseif ($type === 'multi-select') multiSelect( {{ json_encode($options) }}) @endif">
-    <div class="mt-1 relative min-w-50 max-w-50">
+    <div class="mt-1 relative min-w-full z-20" :class="{ 'z-30': open }">
         <button type="button" @click="open = !open"
             class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm">
             <span class="block truncate"
