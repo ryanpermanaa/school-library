@@ -3,7 +3,7 @@
     <div class="mt-1 relative min-w-full z-20" :class="{ 'z-30': open }">
         <button type="button" @click="open = !open"
             class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm">
-            <span class="block truncate"
+            <span class="block truncate capitalize"
                 x-text="selectedOptions.length ? selectedOptions.join(', ') : '{{ $placeholder }}'"></span>
             <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg x-show="selectedOptions.length == 0" class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@
         </button>
 
         <button class="absolute inset-y-0 right-0 items-center pr-2 cursor-pointer" type="button"
-            @click="selectedOptions = []" x-show="selectedOptions.length > 0">
+            @click="selectedOptions = []; $wire.resetCategory()" x-show="selectedOptions.length > 0">
             <svg class="h-5 w-5 text-gray-400 z-10 cursor-pointer hover:text-primary" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -28,11 +28,10 @@
             style="display: none;">
             <template x-for="option in options" :key="option">
 
-                <input type="hidden" name="category" x-bind:value="option.toLowerCase()">
-                <div @click="toggleOption(option)"
+                <div @click="toggleOption(option); $wire.setCategory(option)"
                     class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary hover:text-white group">
                     <span x-text="option" :class="{ 'font-semibold': selectedOptions.includes(option) }"
-                        class="block truncate"></span>
+                        class="block truncate capitalize"></span>
 
                     <span x-show="selectedOptions.includes(option)"
                         class="absolute inset-y-0 right-0 flex items-center pr-4 text-primary group-hover:text-white">
