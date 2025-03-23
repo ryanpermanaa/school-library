@@ -27,6 +27,8 @@
             class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base overflow-auto focus:outline-none sm:text-sm"
             style="display: none;">
             <template x-for="option in options" :key="option">
+
+                <input type="hidden" name="category" x-bind:value="option.toLowerCase()">
                 <div @click="toggleOption(option)"
                     class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary hover:text-white group">
                     <span x-text="option" :class="{ 'font-semibold': selectedOptions.includes(option) }"
@@ -41,6 +43,7 @@
                         </svg>
                     </span>
                 </div>
+
             </template>
         </div>
     </div>

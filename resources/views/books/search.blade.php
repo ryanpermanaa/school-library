@@ -5,54 +5,76 @@
     </section>
 
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
-        <div class="flex flex-col md:flex-row gap-2 mb-5">
-            <div class="flex flex-1 gap-1 w-full">
-                <div class="relative w-full rounded-sm">
+        <div class="flex flex-col min-[75rem]:flex-row gap-2 mb-5">
+            <form action="" method="GET" class="flex gap-1 h-full w-full">
+                <div x-data="{ inputValue: '{{ $_GET['key'] ?? '' }}' }" class="relative w-full rounded-sm">
                     <label for="Search" class="sr-only"> Search </label>
-                    <input type="text" id="Search" placeholder="Cari buku kesukaan anda"
+                    <input type="text" x-model="inputValue" name="key" id="Search"
+                        placeholder="Cari buku kesukaan anda"
                         class="w-full h-full rounded-md bg-[#EEEDEF] px-3 shadow-xs sm:text-sm focus:outline-none" />
+
+                    <a role="button" href="{{ route('search') }}" x-show="inputValue != ''"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer group">
+                        <i class="fa-solid fa-xmark group-hover:text-primary"></i>
+                    </a>
                 </div>
-                <flux:button icon="magnifying-glass"
+                <flux:button type="submit" icon="magnifying-glass"
                     class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
-            </div>
-            <div class="w-full md:w-44">
-                <x-select :options="[
-                    0 => 'Teknologi',
-                    1 => 'Sains',
-                    2 => 'Bisnis',
-                    4 => 'Kesehatan',
-                    5 => 'Pendidikan',
-                    6 => 'Gaya Hidup',
-                    7 => 'Hiburan',
-                    8 => 'Sejarah',
-                    9 => 'Olahraga',
-                    10 => 'Perjalanan',
-                    11 => 'Spiritualitas',
-                ]" type="multi-select" placeholder="Pilih Kategori" name="category" />
-            </div>
-            <div class="w-full md:w-50">
-                <x-select :options="[
-                    0 => 'Terbaru',
-                    1 => 'Terlama',
-                    2 => 'Paling Populer',
-                    3 => 'Terbanyak Disimpan',
-                ]" type="single-select" placeholder="Urutkan Pencarian" name="sortType" />
-            </div>
-            <div class="w-full md:w-44">
-                <x-select :options="[
-                    0 => 'Dipinjam',
-                    1 => 'Tersedia',
-                ]" type="single-select" placeholder="Status Buku" name="sortType" />
+            </form>
+
+            <div class="flex flex-col md:flex-row gap-1">
+                <div class="flex-1 lg:w-44">
+                    <x-select :options="[
+                        0 => 'Teknologi',
+                        1 => 'Sains',
+                        2 => 'Bisnis',
+                        4 => 'Kesehatan',
+                        5 => 'Pendidikan',
+                        6 => 'Gaya Hidup',
+                        7 => 'Hiburan',
+                        8 => 'Sejarah',
+                        9 => 'Olahraga',
+                        10 => 'Perjalanan',
+                        11 => 'Spiritualitas',
+                    ]" type="multi-select" placeholder="Pilih Kategori" name="category" />
+                </div>
+                <div class="flex-1 lg:w-50">
+                    <x-select :options="[
+                        0 => 'Terbaru',
+                        1 => 'Terlama',
+                        2 => 'Paling Populer',
+                        3 => 'Terbanyak Disimpan',
+                    ]" type="single-select" placeholder="Urutkan Pencarian" name="sortType" />
+                </div>
+                <div class="flex-1 lg:w-44">
+                    <x-select :options="[
+                        0 => 'Dipinjam',
+                        1 => 'Tersedia',
+                    ]" type="single-select" placeholder="Status Buku" name="sortType" />
+                </div>
             </div>
         </div>
 
         <flux:separator class="mb-5" />
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
-            @foreach ($books as $book)
-                <x-book-display :$book />
-            @endforeach
-        </div>
+        @if ($books->isEmpty())
+            <p class="text-center italic">
+                ~ &nbsp;
+                @if (isset($_GET['key']))
+                    Buku yang anda cari tidak ditemukkan
+                @else
+                    Tidak ada buku untuk saat ini, coba lagi nanti
+                @endif
+                &nbsp; ~
+            </p>
+        @else
+            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 w-full gap-3 [&>div]:bg-[#E0E0E0]">
+                @foreach ($books as $book)
+                    <x-book-display :$book />
+                @endforeach
+            </div>
+        @endif
+
     </section>
 
 </x-layouts.app>

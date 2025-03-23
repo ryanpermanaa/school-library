@@ -26,9 +26,11 @@
         <flux:separator class="mb-5" />
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
-            @foreach ($popular_books as $book)
+            @forelse ($popular_books as $book)
                 <x-book-display :$book />
-            @endforeach
+            @empty
+                <p>Tidak ada buku ditemukkan</p>
+            @endforelse
         </div>
     </section>
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
