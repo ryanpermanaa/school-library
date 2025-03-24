@@ -16,7 +16,7 @@
         </button>
 
         <button class="absolute inset-y-0 right-0 items-center pr-2 cursor-pointer" type="button"
-            @click="selectedOptions = []; $wire.resetCategory()" x-show="selectedOptions.length > 0">
+            @click="selectedOptions = []; $wire.resetFilter({{ $name }})" x-show="selectedOptions.length > 0">
             <svg class="h-5 w-5 text-gray-400 z-10 cursor-pointer hover:text-primary" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -28,7 +28,7 @@
             style="display: none;">
             <template x-for="option in options" :key="option">
 
-                <div @click="toggleOption(option); $wire.setCategory(option)"
+                <div @click="toggleOption(option); $wire.setFilter('{{ $name }}', option)"
                     class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary hover:text-white group">
                     <span x-text="option" :class="{ 'font-semibold': selectedOptions.includes(option) }"
                         class="block truncate capitalize"></span>

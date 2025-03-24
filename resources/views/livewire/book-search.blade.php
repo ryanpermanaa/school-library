@@ -22,10 +22,10 @@
                 <x-select :options="$categories" type="multi-select" placeholder="Pilih Kategori" name="category" />
             </div>
             <div class="flex-1 lg:w-50">
-                <x-select :options="['Terbaru', 'Terlama', 'Paling Populer', 'Terbanyak Disimpan']" type="single-select" placeholder="Urutkan Pencarian" name="sortType" />
+                <x-select :options="['Terbaru', 'Terlama', 'Paling Populer', 'Terbanyak Disimpan']" type="single-select" name="sortType" placeholder="Urutkan Pencarian" />
             </div>
             <div class="flex-1 lg:w-44">
-                <x-select :options="['Dipinjam', 'Tersedia']" type="single-select" placeholder="Status Buku" name="sortType" />
+                <x-select :options="['Tersedia', 'Dipinjam']" type="single-select" name="statusType" placeholder="Status Buku" />
             </div>
         </div>
     </div>

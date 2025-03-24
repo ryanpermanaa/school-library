@@ -9,9 +9,7 @@ class ExploreController extends Controller
 {
     public function index()
     {
-        $popular_books = Book::query()->withCount('likedByUsers')
-            ->orderBy('liked_by_users_count', 'desc')
-            ->limit(4)
+        $popular_books = Book::query()->popular()->limit(4)
             ->get();
         $latest_books = Book::query()->latest()->limit(4)->get();
 
