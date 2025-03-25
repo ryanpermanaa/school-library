@@ -1,3 +1,5 @@
+@props(['book'])
+
 <div
     {{ $attributes->merge(['class' => 'relative flex flex-col min-h-full rounded-xl shadow-sm hover:shadow-xl transition hover:-translate-y-2 group']) }}>
 

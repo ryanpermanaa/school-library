@@ -14,6 +14,7 @@ class BookSearch extends Component
 
     #[Validate('array|max:11')]
     public $selectedCategories = [];
+    public $categoriesStr = "";
 
     #[Validate('string|in:terbaru,terlama,populer,disimpan')]
     public $sortType = '';
@@ -23,19 +24,31 @@ class BookSearch extends Component
 
     public $books = [];
 
+    protected $queryString = [
+        'categoriesStr' => [
+            'as' => 'category',
+        ],
+        'sortType' => [
+            'as' => 'sort',
+        ],
+        'statusType' => [
+            'as' => 'status',
+        ],
+    ];
+
     public function mount()
     {
         $this->key = request()->query('key');
 
-        $categories = request()->query('categories');
+        $categories = request()->query('category');
         $this->selectedCategories = $categories ? explode(',', $categories) : [];
 
-        $this->loadBooks();
-    }
+        $sortType = request()->query('sort');
+        $this->sortType = $sortType ?? "";
 
-    public function resetSearch()
-    {
-        $this->reset('key');
+        $statusType = request()->query('status');
+        $this->statusType = $statusType ?? "";
+
         $this->loadBooks();
     }
 
@@ -45,10 +58,12 @@ class BookSearch extends Component
 
         if ($filter === "category") {
             if (in_array($value, $this->selectedCategories)) {
-                $this->selectedCategories = array_filter($this->selectedCategories, fn($c) => $c !== $value);
+                $this->selectedCategories = array_values(array_diff($this->selectedCategories, [$value]));
             } else {
                 $this->selectedCategories[] = $value;
             }
+
+            $this->categoriesStr = implode(',', $this->selectedCategories);;
         } else if ($filter === "sortType") {
             $this->sortType = $this->sortType != $value ? $value : "";
         } else if ($filter === "statusType") {
@@ -60,10 +75,17 @@ class BookSearch extends Component
         $this->loadBooks();
     }
 
+    public function resetSearch()
+    {
+        $this->reset('key');
+        $this->loadBooks();
+    }
+
     public function resetFilter($filter)
     {
         if ($filter === "category") {
             $this->reset('selectedCategories');
+            $this->reset('categoriesStr');
         } else if ($filter === "sortType") {
             $this->reset('sortType');
         } else if ($filter === "statusType") {

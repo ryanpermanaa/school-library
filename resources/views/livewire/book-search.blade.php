@@ -1,4 +1,5 @@
 <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
+
     <div class="flex flex-col min-[75rem]:flex-row gap-2 mb-5">
         <form wire:submit="loadBooks" class="flex gap-1 h-full w-full">
             <div class="relative w-full rounded-sm">
@@ -19,13 +20,16 @@
 
         <div class="flex flex-col md:flex-row gap-1">
             <div class="flex-1 lg:w-44">
-                <x-select :options="$categories" type="multi-select" placeholder="Pilih Kategori" name="category" />
+                <x-select :options="$categories" type="multi-select" :entangle="'selectedCategories'" placeholder="Pilih Kategori"
+                    name="category" />
             </div>
             <div class="flex-1 lg:w-50">
-                <x-select :options="['Terbaru', 'Terlama', 'Paling Populer', 'Terbanyak Disimpan']" type="single-select" name="sortType" placeholder="Urutkan Pencarian" />
+                <x-select :options="['Terbaru', 'Terlama', 'Paling Populer', 'Terbanyak Disimpan']" type="single-select" :entangle="'sortType'" name="sortType"
+                    placeholder="Urutkan Pencarian" />
             </div>
             <div class="flex-1 lg:w-44">
-                <x-select :options="['Tersedia', 'Dipinjam']" type="single-select" name="statusType" placeholder="Status Buku" />
+                <x-select :options="['Tersedia', 'Dipinjam']" type="single-select" :entangle="'statusType'" name="statusType"
+                    placeholder="Status Buku" />
             </div>
         </div>
     </div>
