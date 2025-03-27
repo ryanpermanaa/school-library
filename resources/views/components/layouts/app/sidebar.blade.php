@@ -17,14 +17,14 @@
         </a>
 
         <flux:navlist>
-            <flux:navlist.group :heading="__('Admin')" class="grid">
-                @can('dashboard-access')
+            @can('dashboard-access')
+                <flux:navlist.group :heading="__('Admin')" class="grid">
                     <flux:navlist.item icon="square-3-stack-3d" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
                         wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                         {{ __('Dashboard') }}
                     </flux:navlist.item>
-                @endcan
-            </flux:navlist.group>
+                </flux:navlist.group>
+            @endcan
 
             <flux:navlist.group :heading="__('Navigasi')" class="grid">
                 <flux:navlist.item icon="home" :href="route('explore')" :current="request()->routeIs('explore')"

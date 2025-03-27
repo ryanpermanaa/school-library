@@ -7,7 +7,6 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -62,9 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->implode('');
     }
 
-    public function borrowings(): HasMany
+    public function borrowings(): BelongsToMany
     {
-        return $this->hasMany(Borrowing::class);
+        return $this->belongsToMany(Borrowing::class);
     }
 
     public function likedBooks(): BelongsToMany

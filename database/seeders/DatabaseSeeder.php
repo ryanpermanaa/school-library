@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Book;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +19,18 @@ class DatabaseSeeder extends Seeder
             'password' => 'loremipsum'
         ]);
 
-        $this->call([CategorySeeder::class]);
+        $this->call([CategorySeeder::class, BookSeeder::class]);
 
-        Book::factory(5)->create();
+        DB::table('book_likes')->insert([
+            "user_id" => 1,
+            "book_id" => 1,
+            "created_at" => now()
+        ]);
+
+        DB::table('book_saves')->insert([
+            "user_id" => 1,
+            "book_id" => 1,
+            "created_at" => now()
+        ]);
     }
 }
