@@ -19,9 +19,13 @@
         <flux:navlist>
             @can('dashboard-access')
                 <flux:navlist.group :heading="__('Admin')" class="grid">
-                    <flux:navlist.item icon="square-3-stack-3d" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
+                    <flux:navlist.item icon="chart-pie" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
                         wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                         {{ __('Dashboard') }}
+                    </flux:navlist.item>
+                    <flux:navlist.item icon="document-text"
+                        wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
+                        {{ __('Kelola Buku') }}
                     </flux:navlist.item>
                 </flux:navlist.group>
             @endcan
