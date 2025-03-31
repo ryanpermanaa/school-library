@@ -26,7 +26,7 @@ class UserBookController extends Controller
 
     public function view($id)
     {
-        $book = Book::find($id);
+        $book = Book::with(['likedByUsers', 'savedByUsers', 'category'])->find($id);
         return view('books.detail', [
             'book' => $book
         ]);

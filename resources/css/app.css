@@ -39,13 +39,23 @@
     --shadow-3xl: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
-    /*? Infinite scroll animation */
     @keyframes infiniteScroll {
         0% {
             transform: translateX(0);
         }
         100% {
             transform: translateX(-100%);
+        }
+    }
+
+    --animate-like: likeAnimation 0.8s cubic-bezier(0, 0, 0, 0.96);
+
+    @keyframes likeAnimation {
+        40% {
+            transform: scale(1.5) rotate(-10deg);
+        }
+        80% {
+            transform: scale(1) rotate(0);
         }
     }
 }

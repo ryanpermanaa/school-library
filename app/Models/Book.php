@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Book extends Model
 {
@@ -14,9 +16,14 @@ class Book extends Model
 
     protected $fillable = ['title', 'author', 'cover_path', 'category_id', 'likes_count', 'saves_count', 'is_available'];
 
-    public function borrowing(): BelongsTo
+    public function borrowings(): HasMany
     {
-        return $this->belongsTo(Borrowing::class);
+        return $this->hasMany(Borrowing::class);
+    }
+
+    public function currentBorrowing(): HasOne
+    {
+        return $this->hasOne(Borrowing::class)->whereNull('returned_at');
     }
 
     public function likedByUsers(): BelongsToMany

@@ -49,7 +49,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 w-full gap-3 [&>div]:bg-[#E0E0E0]">
                 @foreach ($books as $book)
-                    <x-book-display :$book />
+                    <x-book-display wire:key="book-{{ $book->id }}" :$book />
                 @endforeach
             </div>
         @endif

@@ -19,62 +19,11 @@
 
             <flux:separator class="mb-5" />
 
-            <table class="w-full md:w-80 border-separate border-spacing-y-3 mb-7">
-                <tr>
-                    <td>Kategori</td>
-                    <td>
-                        <span class="whitespace-nowrap lowercase text-sm rounded-md font-bold px-2.5 py-1.5"
-                            style="background-color: {{ $book->category->background_color }}; color: {{ $book->category->text_color }}">
-                            {{ $book->category->name }}
-                        </span>
-                    </td>
-
-                    <td>Disukai</td>
-                    <td class="font-bold">{{ $book->likedByUsers->count() }}</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>
-                        <span
-                            class="w-fit inline-flex items-center justify-center rounded-full {{ $book->is_available ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
-                            <i
-                                class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark' }} text-[8px] mr-1.5"></i>
-                            <p class="text-sm font-semibold whitespace-nowrap">
-                                {{ $book->is_available ? 'Tersedia' : 'Dipinjam' }}
-                            </p>
-                        </span>
-                    </td>
-
-                    <td>Disimpan</td>
-                    <td class="font-bold">{{ $book->savedByUsers->count() }}</td>
-                </tr>
-            </table>
-
-            <div class="flex justify-center md:justify-start gap-3">
-                <button x-data="{ borrowed: false }" x-on:click="borrowed = !borrowed; runConfetti(borrowed)"
-                    class="relative text-primary bg-[#462e7a] w-44 rounded-md cursor-pointer transition group">
-                    <span
-                        class="font-bold text-md absolute inset-0 flex justify-center items-center rounded-md bg-[#FBFBFB] border-3 border-primary -translate-y-1.5 group-hover:-translate-y-2 transition group-active:translate-y-0"
-                        :class="{ 'bg-primary text-custom-white': borrowed }">
-                        <span x-show="borrowed">Lihat Buku -></span>
-                        <span x-show="!borrowed">Pinjam Buku</span>
-                    </span>
-                </button>
-
-                <div class="">
-                    <flux:button square tooltip="Suka" class="bg-primary/15! cursor-pointer border-none! shadow-none">
-                        <flux:icon.hand-thumb-up variant="outline" class="text-primary size-6 border-none" />
-                    </flux:button>
-                    <flux:button square tooltip="Simpan" class="bg-primary/15! cursor-pointer border-none! shadow-none">
-                        <flux:icon.bookmark variant="outline" class="text-primary size-6 border-none" />
-                    </flux:button>
-                </div>
-            </div>
+            @livewire('book-detail-action', ['book' => $book])
         </div>
 
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script>
         function runConfetti(borrowed) {
             if (!borrowed) return;
