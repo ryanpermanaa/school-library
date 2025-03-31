@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Borrowing;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -39,8 +40,18 @@ class BookDetailAction extends Component
     {
         if (!Auth::check()) return;
 
-        // $user = Auth::user()->load(['borrowings']);
-        // $user->borrowings()->toggle($this->book->id);
+        $user = Auth::user()->load(['borrowings']);
+
+        Borrowing::create([
+            'user_id' => $user->id,
+            'book_id' => $this->book->id,
+            'borrowed_at' => now(),
+            'due_date' => now()->addWeek(),
+        ]);
+
+        $this->book->update([
+            'is_available' => false
+        ]);
     }
 
     public function render()

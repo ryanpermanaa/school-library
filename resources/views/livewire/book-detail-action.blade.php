@@ -31,18 +31,18 @@
     </table>
 
     <div class="flex justify-center md:justify-start gap-3 h-10" x-data="{ borrowed: @js($isCurrentUserBorrowing) }">
-        @if ($book->is_available)
-            <button @click="borrowed = !borrowed; runConfetti(borrowed);" x-bind:disabled="borrowed"
-                @disabled($isCurrentUserBorrowing)
+        @if ($book->is_available || $isCurrentUserBorrowing)
+            <button @click="borrowed = !borrowed; runConfetti(borrowed); $wire.borrowBook()"
+                x-bind:disabled="borrowed" @disabled($isCurrentUserBorrowing)
                 class="relative text-primary bg-[#462e7a] w-44 rounded-md transition group">
 
                 <span
                     class="font-bold text-md cursor-pointer absolute inset-0 flex justify-center items-center rounded-md bg-[#FBFBFB] border-3 border-primary -translate-y-1.5 group-hover:-translate-y-2 transition group-active:translate-y-0"
                     :class="{ 'bg-primary text-custom-white': borrowed }">
                     <a href="{{ route('search') }}" class="absolute inset-0 flex items-center justify-center z-10"
-                        x-show="borrowed">Lihat
-                        Inventory
-                        -></a>
+                        x-show="borrowed">
+                        Lihat Inventory ->
+                    </a>
                     <span x-show="!borrowed">Pinjam Buku</span>
                 </span>
 
@@ -58,16 +58,21 @@
 
         <div class="flex gap-2" x-data="{ liked: @js($isLiked), saved: @js($isSaved) }">
 
-            <button @click="liked = !liked; $wire.likeBook()"
-                class="aspect-square bg-primary/15 h-full flex items-center justify-center rounded-md cursor-pointer">
-                <flux:icon.hand-thumb-up x-show="liked" variant="solid" class="text-primary animate-like" />
-                <flux:icon.hand-thumb-up x-show="!liked" variant="outline" class="text-primary" />
-            </button>
-            <button @click="saved = !saved; $wire.saveBook()"
-                class="aspect-square bg-primary/15 h-full flex items-center justify-center rounded-md cursor-pointer">
-                <flux:icon.bookmark x-show="saved" variant="solid" class="text-primary animate-like" />
-                <flux:icon.bookmark x-show="!saved" variant="outline" class="text-primary" />
-            </button>
+            <flux:tooltip content="Suka">
+                <button @click="liked = !liked; $wire.likeBook()" tooltip="Suka"
+                    class="aspect-square bg-primary/15 h-full flex items-center justify-center rounded-md cursor-pointer">
+                    <flux:icon.hand-thumb-up x-show="liked" variant="solid" class="text-primary animate-like" />
+                    <flux:icon.hand-thumb-up x-show="!liked" variant="outline" class="text-primary" />
+                </button>
+            </flux:tooltip>
+
+            <flux:tooltip content="Simpan">
+                <button @click="saved = !saved; $wire.saveBook()" tooltip="Simpan"
+                    class="aspect-square bg-primary/15 h-full flex items-center justify-center rounded-md cursor-pointer">
+                    <flux:icon.bookmark x-show="saved" variant="solid" class="text-primary animate-like" />
+                    <flux:icon.bookmark x-show="!saved" variant="outline" class="text-primary" />
+                </button>
+            </flux:tooltip>
 
         </div>
     </div>

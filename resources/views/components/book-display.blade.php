@@ -14,12 +14,12 @@
     </a>
 
     <div class="bg-white max-h-fit flex-1 p-5 rounded-b-xl">
-        <div class="relative font-medium text-primary flex text-sm items-center gap-3 mb-2">
-            <span>
+        <div class="relative font-medium text-primary flex text-sm items-center gap-2 mb-2">
+            <span class="flex items-center gap-0.5">
                 <i class="fa-solid fa-thumbs-up mr-0.5"></i>
                 <b>{{ $book->likedByUsers->count() }}</b>
             </span>
-            <span>
+            <span class="flex items-center gap-0.5">
                 <i class="fa-solid fa-bookmark mr-1"></i>
                 <b>{{ $book->savedByUsers->count() }}</b>
             </span>
@@ -39,11 +39,18 @@
             </h4>
             <p class="font-crimson text-lg truncate">{{ $book['author'] }}</p>
         </div>
-        <div class="flex gap-1 text-xs">
+        <div class="flex justify-between items-center gap-1 text-xs">
             <span class="lowercase whitespace-nowrap rounded-md font-bold px-2.5 py-1.5"
                 style="background-color: {{ $book->category->background_color }}; color: {{ $book->category->text_color }}">
                 {{ $book->category->name }}
             </span>
+
+            @if ($book->borrowings->contains(Auth::user()->id))
+                <flux:button href="{{ route('search') }}" tooltip="Kelola Buku"
+                    class="h-7! aspect-square p-0! rounded-full! border-none! bg-primary! text-custom-white!">
+                    <flux:icon.cog-6-tooth variant="micro" size="6" />
+                </flux:button>
+            @endif
         </div>
     </div>
 
