@@ -17,7 +17,7 @@
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-4">
         <div class="flex items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Buku-buku populer</h2>
-            <a href="{{ route('search') }}?sort=paling+populer"
+            <a href="{{ route('book.search') }}?sort=paling+populer"
                 class="text-sm text-primary font-bold flex items-center gap-2 group">
                 <span class="group-hover:underline underline-offset-2">Lihat Semua</span>
                 <i class="fa-solid fa-arrow-right-long pt-0.5"></i>
@@ -37,7 +37,7 @@
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
         <div class="flex items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Terbaru ditambahkan</h2>
-            <a href="{{ route('search') }}?sort=terbaru"
+            <a href="{{ route('book.search') }}?sort=terbaru"
                 class="text-sm text-primary font-bold flex items-center gap-2 group">
                 <span class="group-hover:underline underline-offset-2">Lihat Semua</span>
                 <i class="fa-solid fa-arrow-right-long pt-0.5"></i>

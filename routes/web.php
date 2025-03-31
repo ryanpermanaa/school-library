@@ -29,10 +29,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //? Books
-    Route::group(['prefix' => 'books'], function () {
-        Route::get('explore', [UserBookController::class, 'explore'])->name('explore');
-        Route::get('search', [UserBookController::class, 'search'])->name('search');
-        Route::get('details/{id}', [UserBookController::class, 'view'])->name('book.details');
+    Route::group(['prefix' => 'buku', 'as' => 'book.'], function () {
+        Route::get('jelajahi', [UserBookController::class, 'explore'])->name('explore');
+        Route::get('cari', [UserBookController::class, 'search'])->name('search');
+        Route::get('detail/{id}', [UserBookController::class, 'view'])->name('details');
     });
 });
 

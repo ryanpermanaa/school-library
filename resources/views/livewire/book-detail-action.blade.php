@@ -39,7 +39,7 @@
                 <span
                     class="font-bold text-md cursor-pointer absolute inset-0 flex justify-center items-center rounded-md bg-[#FBFBFB] border-3 border-primary -translate-y-1.5 group-hover:-translate-y-2 transition group-active:translate-y-0"
                     :class="{ 'bg-primary text-custom-white': borrowed }">
-                    <a href="{{ route('search') }}" class="absolute inset-0 flex items-center justify-center z-10"
+                    <a href="{{ route('book.search') }}" class="absolute inset-0 flex items-center justify-center z-10"
                         x-show="borrowed">
                         Lihat Inventory ->
                     </a>

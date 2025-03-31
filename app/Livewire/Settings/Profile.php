@@ -62,7 +62,7 @@ class Profile extends Component
         $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('explore', absolute: false));
+            $this->redirectIntended(default: route('book.explore', absolute: false));
 
             return;
         }

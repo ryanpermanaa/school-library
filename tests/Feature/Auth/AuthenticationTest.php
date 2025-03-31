@@ -22,7 +22,7 @@ test('users can authenticate using the login screen', function () {
 
     $response
         ->assertHasNoErrors()
-        ->assertRedirect(route('explore', absolute: false));
+        ->assertRedirect(route('book.explore', absolute: false));
 
     $this->assertAuthenticated();
 });

@@ -38,6 +38,6 @@ class Register extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('explore', absolute: false), navigate: true);
+        $this->redirect(route('book.explore', absolute: false), navigate: true);
     }
 }

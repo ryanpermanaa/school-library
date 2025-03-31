@@ -9,7 +9,7 @@
     <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
-        <a href="{{ route('explore') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
+        <a href="{{ route('book.explore') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
             <x-app-logo />
         </a>
 
@@ -86,7 +86,7 @@
         class="lg:hidden border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-        <a href="{{ route('explore') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
+        <a href="{{ route('book.explore') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
             <x-app-logo />
         </a>
 

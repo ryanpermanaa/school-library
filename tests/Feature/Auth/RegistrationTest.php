@@ -21,7 +21,7 @@ test('new users can register', function () {
 
     $response
         ->assertHasNoErrors()
-        ->assertRedirect(route('explore', absolute: false));
+        ->assertRedirect(route('book.explore', absolute: false));
 
     $this->assertAuthenticated();
 });
