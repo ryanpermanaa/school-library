@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('author');
             $table->string('cover_path');
             $table->foreignId('category_id')->constrained();
-            $table->boolean('is_available');
             $table->timestamps();
         });
 

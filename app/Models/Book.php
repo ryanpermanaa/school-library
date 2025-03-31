@@ -14,7 +14,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'cover_path', 'category_id', 'likes_count', 'saves_count', 'is_available'];
+    protected $fillable = ['title', 'author', 'cover_path', 'category_id', 'likes_count', 'saves_count'];
 
     public function borrowings(): HasMany
     {
@@ -24,6 +24,11 @@ class Book extends Model
     public function currentBorrowing(): HasOne
     {
         return $this->hasOne(Borrowing::class)->whereNull('returned_at');
+    }
+
+    public function getIsAvailableAttribute()
+    {
+        return $this->borrowings()->whereNull('returned_at')->doesntExist();
     }
 
     public function likedByUsers(): BelongsToMany

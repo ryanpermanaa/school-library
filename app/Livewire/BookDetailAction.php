@@ -16,7 +16,10 @@ class BookDetailAction extends Component
         $this->book = $book;
         $this->isLiked = Auth::user()->likedBooks->contains($book->id);
         $this->isSaved = Auth::user()->savedBooks->contains($book->id);
-        $this->isCurrentUserBorrowing = Auth::user()->borrowings->contains($book->id);
+
+        if ($book->currentBorrowing) {
+            $this->isCurrentUserBorrowing = $book->currentBorrowing->user_id == Auth::user()->id;
+        }
     }
 
     public function likeBook()
@@ -52,6 +55,8 @@ class BookDetailAction extends Component
         $this->book->update([
             'is_available' => false
         ]);
+
+        $this->isCurrentUserBorrowing = $this->book->currentBorrowing->user_id == Auth::user()->id;
     }
 
     public function render()

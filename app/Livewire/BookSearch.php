@@ -132,7 +132,7 @@ class BookSearch extends Component
         $categories = Category::pluck('name')->toArray();
 
         $books = Book::query()
-            ->with(['likedByUsers', 'savedByUsers', 'category'])
+            ->with(['likedByUsers', 'savedByUsers', 'category', 'borrowings'])
             ->when($this->key, fn($query) => $query->where("title", "like", "%{$this->key}%"))
             ->when($this->selectedCategories, fn($query) => $query->whereHas(
                 "category",

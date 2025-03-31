@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('jelajahi', [UserBookController::class, 'explore'])->name('explore');
         Route::get('cari', [UserBookController::class, 'search'])->name('search');
         Route::get('detail/{id}', [UserBookController::class, 'view'])->name('details');
+        Route::get('dipinjam', [UserBookController::class, 'borrow'])->name('borrow');
     });
 });
 

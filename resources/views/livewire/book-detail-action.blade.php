@@ -39,7 +39,7 @@
                 <span
                     class="font-bold text-md cursor-pointer absolute inset-0 flex justify-center items-center rounded-md bg-[#FBFBFB] border-3 border-primary -translate-y-1.5 group-hover:-translate-y-2 transition group-active:translate-y-0"
                     :class="{ 'bg-primary text-custom-white': borrowed }">
-                    <a href="{{ route('book.search') }}" class="absolute inset-0 flex items-center justify-center z-10"
+                    <a href="{{ route('book.borrow') }}" class="absolute inset-0 flex items-center justify-center z-10"
                         x-show="borrowed">
                         Lihat Inventory ->
                     </a>
@@ -51,7 +51,7 @@
             <button class="relative bg-gray-900 w-44 rounded-md transition group">
                 <span
                     class="font-bold text-md absolute inset-0 flex justify-center items-center rounded-md text-custom-white bg-gray-600 border-3 border-gray-600 cursor-not-allowed -translate-y-1.5 transition group-active:translate-y-0">
-                    <a>Buku Dipinjam :(</a>
+                    Buku Dipinjam :(
                 </span>
             </button>
         @endif

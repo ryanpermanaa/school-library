@@ -39,7 +39,7 @@
                     wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Cari Buku') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="book-open"
+                <flux:navlist.item icon="book-open" :href="route('book.borrow')" :current="request()->routeIs('book.borrow')"
                     wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Buku Dipinjam') }}
                 </flux:navlist.item>

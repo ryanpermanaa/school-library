@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('book_likes')->insert([
             "user_id" => 1,
-            "book_id" => 1,
+            "book_id" => 4,
             "created_at" => now()
         ]);
 
         DB::table('book_saves')->insert([
             "user_id" => 1,
-            "book_id" => 1,
+            "book_id" => 4,
             "created_at" => now()
         ]);
     }
