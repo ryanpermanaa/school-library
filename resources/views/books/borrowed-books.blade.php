@@ -1,5 +1,5 @@
 <x-layouts.app title="Buku Dipinjam" class="">
 
-    <h1>Test</h1>
+    @livewire('borrowed-book')
 
 </x-layouts.app>

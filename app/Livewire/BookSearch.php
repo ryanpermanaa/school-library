@@ -98,32 +98,6 @@ class BookSearch extends Component
 
     public function loadBooks()
     {
-        // $this->books = Book::query()
-        //     ->with(['likedByUsers', 'savedByUsers', 'category'])
-        //     ->when($this->key, function ($query, string $key) {
-        //         return $query->where("title", "like", "%{$key}%");
-        //     })
-        //     ->when($this->selectedCategories, function ($query) {
-        //         return $query->whereHas(
-        //             "category",
-        //             fn($query) => $query->whereIn("name", $this->selectedCategories)
-        //         );
-        //     })
-        //     ->when($this->sortType, function ($query, string $sortType) {
-        //         if ($sortType === "terbaru") {
-        //             return $query->latest();
-        //         } else if ($sortType === "terlama") {
-        //             return $query->oldest();
-        //         } else if ($sortType === "paling populer") {
-        //             return $query->popular();
-        //         } else if ($sortType === "terbanyak disimpan") {
-        //             return $query->withCount("savedByUsers")->orderBy("saved_by_users_count", "desc");
-        //         }
-        //     })
-        //     ->when($this->statusType, function ($query, $statusType) {
-        //         return $query->where("is_available", $statusType === "tersedia");
-        //     })
-        //     ->paginate(2);
         $this->resetPage();
     }
 

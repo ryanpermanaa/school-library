@@ -4,15 +4,15 @@
         class="flex flex-col lg:flex-row items-center justify-between gap-7 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
         <h1 class="text-3xl font-playfair font-bold whitespace-nowrap">Jelajahi Buku</h1>
 
-        <div class="flex gap-2 w-full lg:w-fit">
+        <form action="{{ route('book.search') }}" method="GET" class="flex gap-2 w-full lg:w-fit">
             <div class="relative w-full md:w-70 rounded-sm">
                 <label for="Search" class="sr-only"> Search </label>
-                <input type="text" id="Search" placeholder="Cari buku kesukaan anda"
+                <input type="text" id="Search" name="key" placeholder="Cari buku kesukaan anda"
                     class="w-full h-full rounded-md bg-[#EEEDEF] px-3 shadow-xs sm:text-sm focus:outline-none" />
             </div>
-            <flux:button icon="magnifying-glass"
+            <flux:button type="submit" icon="magnifying-glass"
                 class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
-        </div>
+        </form>
     </section>
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-4">
         <div class="flex items-center justify-between mb-3">

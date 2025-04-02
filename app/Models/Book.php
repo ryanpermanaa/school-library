@@ -36,6 +36,11 @@ class Book extends Model
         return $this->belongsToMany(User::class, 'book_likes');
     }
 
+    public function dislikedByUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'book_dislikes');
+    }
+
     public function savedByUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'book_saves');

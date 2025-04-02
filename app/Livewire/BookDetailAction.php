@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
+use Livewire\Component;
 use App\Models\Borrowing;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 
 class BookDetailAction extends Component
 {
