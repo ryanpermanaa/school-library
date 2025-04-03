@@ -45,7 +45,7 @@
                 {{ $book->category->name }}
             </span>
 
-            @if ($book->borrowings->contains(Auth::user()->id))
+            @if ($book->borrowings->first()?->user_id == Auth::user()->id)
                 <flux:button href="{{ route('book.borrow') }}" tooltip="Kelola Buku"
                     class="h-7! aspect-square p-0! rounded-full! border-none! bg-primary! text-custom-white!">
                     <flux:icon.cog-6-tooth variant="micro" size="6" />

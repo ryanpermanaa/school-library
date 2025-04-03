@@ -1,7 +1,12 @@
 <x-layouts.app title="Detail Buku" class="">
 
     <section
-        class="flex flex-col xl:flex-row items-center gap-8 md:gap-18 p-5 px-6 md:px-19 rounded-lg bg-[#FBFBFB] w-full min-h-full mb-4 shadow-lg overflow-hidden">
+        class="relative flex flex-col xl:flex-row items-center gap-8 md:gap-18 p-5 px-6 md:px-19 rounded-lg bg-[#FBFBFB] w-full min-h-full mb-4 shadow-lg overflow-hidden">
+
+        <flux:button href="{{ url()->previous() }}" square tooltip="Back"
+            class="absolute! left-3 top-3 bg-primary/20! text-primary!">
+            <flux:icon.arrow-left-circle variant="solid" class="size-8" />
+        </flux:button>
 
         <div class="min-h-full relative flex-1 flex justify-center items-center w-full">
             <img class="w-3/4 md:w-xs shadow-3xl z-10" src="{{ $book->cover_path }}" alt="">

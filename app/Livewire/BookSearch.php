@@ -50,7 +50,7 @@ class BookSearch extends Component
         $statusType = request()->query('status');
         $this->statusType = $statusType ?? "";
 
-        $this->loadBooks();
+        $this->resetPage();
     }
 
     public function setFilter(string $filter, $value)
@@ -73,13 +73,13 @@ class BookSearch extends Component
             return;
         }
 
-        $this->loadBooks();
+        $this->resetPage();
     }
 
     public function resetSearch()
     {
         $this->reset('key');
-        $this->loadBooks();
+        $this->resetPage();
     }
 
     public function resetFilter($filter)
@@ -93,11 +93,6 @@ class BookSearch extends Component
             $this->reset('statusType');
         }
 
-        $this->loadBooks();
-    }
-
-    public function loadBooks()
-    {
         $this->resetPage();
     }
 
@@ -123,8 +118,6 @@ class BookSearch extends Component
             })
             ->when($this->statusType, fn($query) => $query->where("is_available", $this->statusType === "tersedia"))
             ->paginate(10);
-
-        // dump($books);
 
         return view('livewire.book-search', [
             'books' => $books,

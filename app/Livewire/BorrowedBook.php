@@ -2,45 +2,24 @@
 
 namespace App\Livewire;
 
-use App\Models\Book;
+use App\Models\Borrowing;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class BorrowedBook extends Component
 {
-    public $book;
-    public $isLiked, $isDisliked, $isSaved;
-
-    public function likeBook()
-    {
-        if (!Auth::check()) return;
-
-        $user = Auth::user()->load(['likedBooks']);
-        $user->likedBooks()->toggle($this->book->id);
-    }
-
-    public function dislikeBook()
-    {
-        if (!Auth::check()) return;
-
-        $user = Auth::user()->load(['likedBooks']);
-        $user->likedBooks()->toggle($this->book->id);
-    }
-
-    public function saveBook()
-    {
-        if (!Auth::check()) return;
-
-        $user = Auth::user()->load(['savedBooks']);
-        $user->savedBooks()->toggle($this->book->id);
-    }
+    use WithPagination;
 
     public function render()
     {
-        $this->book = $books = Book::query()
-            ->with(['likedByUsers', 'savedByUsers', 'category', 'borrowings'])
-            ->first();
+        $borrowings = Borrowing::where('user_id', Auth::user()->id)
+            ->with(['book'])
+            ->orderByDesc('due_date')
+            ->paginate(10);
 
-        return view('livewire.borrowed-book', $this->book);
+        return view('livewire.borrowed-book', [
+            'borrowings' => $borrowings
+        ]);
     }
 }

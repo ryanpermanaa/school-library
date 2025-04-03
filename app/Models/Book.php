@@ -14,7 +14,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'cover_path', 'category_id', 'likes_count', 'saves_count'];
+    protected $fillable = ['title', 'author', 'description', 'cover_path', 'category_id', 'likes_count', 'saves_count'];
 
     public function borrowings(): HasMany
     {
