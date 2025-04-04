@@ -43,7 +43,7 @@
                     wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Buku Dipinjam') }}
                 </flux:navlist.item>
-                <flux:navlist.item icon="bookmark"
+                <flux:navlist.item icon="bookmark" :href="route('book.saved')" :current="request()->routeIs('book.saved')"
                     wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                     {{ __('Disimpan') }}
                 </flux:navlist.item>

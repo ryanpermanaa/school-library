@@ -7,10 +7,10 @@
         <span class="new-badge"></span>
     @endif
 
-    <a href="{{ route('book.details', $book['id']) }}" class="flex-1">
-        <img src="{{ $book['cover_path'] }}"
+    <a href="{{ route('book.details', $book->id) }}" class="flex-1">
+        <img src="{{ $book->cover_path }}"
             class="w-3/5 mx-auto my-5 shadow-3xl transition group-hover:-translate-y-4 group-hover:scale-110 duration-300 ease-in-out"
-            alt="{{ $book['title'] }} book cover">
+            alt="cover book of {{ $book->title }}">
     </a>
 
     <div class="bg-white max-h-fit flex-1 p-5 rounded-b-xl">
@@ -27,7 +27,7 @@
             <span
                 class="w-fit inline-flex items-center justify-center rounded-full {{ $book->is_available ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
                 <i
-                    class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark' }} text-[8px] mr-1.5"></i>
+                    class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark text-[10px]' }} text-[8px] mr-1.5"></i>
                 <p class="text-sm font-regular whitespace-nowrap">
                     {{ $book->is_available ? 'Tersedia' : 'Dipinjam' }}
                 </p>

@@ -28,7 +28,7 @@ class Book extends Model
 
     public function getIsAvailableAttribute()
     {
-        return $this->borrowings()->whereNull('returned_at')->doesntExist();
+        return $this->currentBorrowing === null;
     }
 
     public function likedByUsers(): BelongsToMany

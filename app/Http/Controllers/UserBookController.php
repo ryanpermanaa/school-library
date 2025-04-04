@@ -9,9 +9,9 @@ class UserBookController extends Controller
 {
     public function explore()
     {
-        $popular_books = Book::with(['likedByUsers', 'savedByUsers', 'category', 'borrowings'])->popular()->limit(4)
+        $popular_books = Book::with(['likedByUsers', 'savedByUsers', 'category', 'borrowings', 'currentBorrowing'])->popular()->limit(4)
             ->get();
-        $latest_books = Book::with(['likedByUsers', 'savedByUsers', 'category', 'borrowings'])->latest()->limit(4)->get();
+        $latest_books = Book::with(['likedByUsers', 'savedByUsers', 'category', 'borrowings', 'currentBorrowing'])->latest()->limit(4)->get();
 
         return view('books.explore', [
             'popular_books' => $popular_books,
@@ -36,5 +36,10 @@ class UserBookController extends Controller
     {
         $book = Book::with(['likedByUsers', 'savedByUsers', 'category', 'borrowings'])->get();
         return view('books.borrowed-books');
+    }
+
+    public function saved()
+    {
+        return view('books.saved-books');
     }
 }
