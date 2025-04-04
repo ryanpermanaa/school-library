@@ -11,15 +11,32 @@ class BorrowedBook extends Component
 {
     use WithPagination;
 
+    public function returnBook(Borrowing $borrowment)
+    {
+        if (!Auth::check()) return;
+
+        $borrowment->update([
+            'returned_at' => now(),
+            'status' => 'returned'
+        ]);
+
+        $borrowment->book->update([
+            'is_available' => true
+        ]);
+
+        $this->resetPage();
+    }
+
     public function render()
     {
         $borrowings = Borrowing::where('user_id', Auth::user()->id)
+            ->where('returned_at', null)
             ->with(['book'])
-            ->orderByDesc('due_date')
-            ->paginate(10);
+            ->orderBy('due_date')
+            ->paginate(8);
 
         return view('livewire.borrowed-book', [
-            'borrowings' => $borrowings
+            'borrowings' => $borrowings,
         ]);
     }
 }

@@ -116,7 +116,13 @@ class BookSearch extends Component
                     default => $query
                 };
             })
-            ->when($this->statusType, fn($query) => $query->where("is_available", $this->statusType === "tersedia"))
+            ->when($this->statusType, function ($query) {
+                if ($this->statusType === 'tersedia') {
+                    $query->whereDoesntHave('currentBorrowing');
+                } elseif ($this->statusType === 'dipinjam') {
+                    $query->whereHas('currentBorrowing');
+                }
+            })
             ->paginate(10);
 
         return view('livewire.book-search', [

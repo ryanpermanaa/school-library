@@ -52,10 +52,6 @@ class BookDetailAction extends Component
             'due_date' => now()->addWeek(),
         ]);
 
-        $this->book->update([
-            'is_available' => false
-        ]);
-
         $this->isCurrentUserBorrowing = $this->book->currentBorrowing->user_id == Auth::user()->id;
     }
 
