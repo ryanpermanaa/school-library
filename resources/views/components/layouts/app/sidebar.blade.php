@@ -9,7 +9,7 @@
 </head>
 
 <body class="min-h-screen bg-[#DED8E0] dark:bg-zinc-800">
-    <flux:sidebar sticky stashable class="bg-custom-black text-custom-white dark:border-zinc-700 dark:bg-zinc-900 shadow-3xl">
+    <flux:sidebar sticky stashable class="bg-custom-black text-custom-white dark:border-zinc-700 dark:bg-zinc-900 shadow-3xl z-50!">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('book.explore') }}" class="mr-5 flex items-center space-x-2" wire:navigate>

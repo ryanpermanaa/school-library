@@ -1,32 +1,42 @@
 <div>
 
     <section
-        class="flex flex-col lg:flex-row items-center justify-between gap-7 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-3 shadow-lg">
-        <h1 class="text-3xl font-playfair font-bold whitespace-nowrap">Buku yang disimpan</h1>
+        class="flex flex-col xl:flex-row  items-center justify-between gap-7 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-3 shadow-lg">
+        <h1 class="text-3xl font-playfair font-bold text-center">Buku yang disimpan</h1>
 
-        <div class="relative flex bg-[#EEEDEF] border rounded-md shadow text-white text-sm" x-data="{ inputValue: '' }">
-            <div aria-disabled="true" class="text-black w-10 grid place-content-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                </svg>
+        <div class="flex flex-wrap gap-4">
+            <div class="relative w-full lg:w-fit flex bg-[#EEEDEF] border rounded-md shadow text-white text-sm"
+                x-data="{ inputValue: '' }">
+                <div aria-disabled="true" class="text-black w-10 grid place-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </div>
+
+                <input type="text" x-model="inputValue" wire:model.live.debounce.400="search" spellcheck="false"
+                    name="text"
+                    class="text-black bg-transparent py-1.5 outline-none placeholder:text-zinc-400 h-9 w-full sm:w-60 transition-all"
+                    placeholder="Cari buku yang anda simpan..." />
+
+                <button x-show="inputValue.length > 0" x-on:click="inputValue = ''; $wire.resetSearch()"
+                    class="absolute top-1/2 -translate-y-1/2 right-0 text-gray-800 w-8 h-full grid place-content-center cursor-pointer hover:text-red-700 bg-[#EEEDEF] border-l-2"
+                    aria-label="Clear input button" tooltip="Delete input" type="reset">
+                    <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"
+                        fill="none" viewBox="0 0 24 24" height="16" width="16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
             </div>
 
-            <input type="text" x-model="inputValue" wire:model.live.debounce.400="search" spellcheck="false"
-                name="text"
-                class="text-black bg-transparent py-1.5 outline-none placeholder:text-zinc-400 h-9 w-60 transition-all"
-                placeholder="Cari buku yang anda simpan..." />
-
-            <button x-show="inputValue.length > 0" x-on:click="inputValue = ''; $wire.resetSearch()"
-                class="absolute top-1/2 -translate-y-1/2 right-0 text-gray-800 w-8 h-full grid place-content-center cursor-pointer hover:text-red-700 bg-[#EEEDEF] border-l-2"
-                aria-label="Clear input button" tooltip="Delete input" type="reset">
-                <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"
-                    fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6 6 18"></path>
-                    <path d="m6 6 12 12"></path>
-                </svg>
-            </button>
+            <div class="w-full lg:w-44">
+                <x-select :options="['Tersedia', 'Dipinjam']" type="single-select" :entangle="'statusType'" name="statusType"
+                    placeholder="Status Buku" />
+            </div>
         </div>
 
     </section>
@@ -34,7 +44,7 @@
     <section class="grid grid-cols-1 xl:grid-cols-2 gap-3 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-3 shadow-lg">
 
         @forelse ($books as $book)
-            <div class="col-span-1 flex flex-col sm:flex-row min-w-50 items-center bg-white shadow-xl rounded-lg p-5 overflow-hidden"
+            <div class="col-span-1 flex flex-col sm:flex-row min-w-50 items-center bg-white shadow-md hover:shadow-xl hover:-translate-y-2 transition rounded-lg p-5 overflow-hidden"
                 wire:key="saved-book-{{ $book->id }}">
 
                 <img src="{{ $book->cover_path }}" alt="cover book of {{ $book->title }}"

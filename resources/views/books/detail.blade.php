@@ -13,7 +13,8 @@
             <div class="absolute bg-gray-200 w-full aspect-square rounded-full"></div>
         </div>
         <div class="min-h-full flex-1 flex flex-col justify-center items-center md:items-start z-10">
-            <h2 class="text-4xl md:text-4xl font-playfair font-semibold mb-3">{{ $book->title }}</h2>
+            <h2 class="text-4xl md:text-4xl font-playfair font-semibold text-center md:text-start mb-3">
+                {{ $book->title }}</h2>
             <p class="text-lg mb-5">Oleh <span class="capitalize font-semibold">{{ $book->author }}</span></p>
 
             <p class="font-crimson text-xl font-light max-w-lg mb-5 text-justify">
