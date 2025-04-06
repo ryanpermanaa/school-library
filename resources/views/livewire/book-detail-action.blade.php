@@ -17,8 +17,8 @@
     <section
         class="relative flex flex-col lg:flex-row items-center justify-between p-5 px-6 lg:px-19 rounded-lg bg-[#FBFBFB] w-full min-h-full mb-4 shadow-lg overflow-hidden">
 
-        <flux:button as="link" href="{{ url()->previous() }}" wire:navigate square tooltip="Back"
-            class="absolute! left-3 top-3 bg-primary/20! text-primary! cursor-pointer">
+        <flux:button as="link" href="{{ $initialPreviousUrl ?? route('book.explore') }}" wire:navigate square
+            tooltip="Back" class="absolute! left-3 top-3 bg-primary/20! text-primary! cursor-pointer">
             <flux:icon.arrow-left-circle variant="solid" class="size-8 z-20" />
         </flux:button>
 

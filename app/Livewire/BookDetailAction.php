@@ -13,12 +13,15 @@ class BookDetailAction extends Component
     public $book;
     public $isLiked, $isSaved, $isCurrentUserBorrowing;
     public $borrowSuccess;
+    public $initialPreviousUrl;
 
     public function mount($book)
     {
         $this->book = $book;
         $this->isLiked = Auth::user()->likedBooks->contains($book->id);
         $this->isSaved = Auth::user()->savedBooks->contains($book->id);
+
+        $this->initialPreviousUrl = request()->headers->get('referer') ?? route('home');
 
         if ($book->currentBorrowing) {
             $this->isCurrentUserBorrowing = $book->currentBorrowing->user_id == Auth::user()->id;
@@ -75,7 +78,8 @@ class BookDetailAction extends Component
     {
         return view('livewire.book-detail-action', [
             'book' => $this->book,
-            'borrowSuccess' => $this->borrowSuccess
+            'borrowSuccess' => $this->borrowSuccess,
+            'initialPreviousUrl' => $this->initialPreviousUrl
         ]);
     }
 }
