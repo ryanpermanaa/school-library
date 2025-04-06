@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-gray-200 *:even:bg-gray-100">
 
                     @foreach ($borrowings as $borrowment)
                         <x-book-table :$borrowment :book="$borrowment->book" wire:key="borrowed-book-{{ $borrowment->id }}" />

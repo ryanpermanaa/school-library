@@ -6,7 +6,7 @@
         <span class="new-badge"></span>
     @endif
 
-    <a href="{{ route('book.details', $book->id) }}" class="flex-1">
+    <a href="{{ route('book.details', $book->id) }}" wire:navigate class="flex-1">
         <img src="{{ $book->cover_path }}"
             class="w-3/5 mx-auto my-5 shadow-3xl transition group-hover:-translate-y-4 group-hover:scale-110 duration-300 ease-in-out"
             alt="cover book of {{ $book->title }}">
@@ -44,9 +44,9 @@
                 {{ $book->category->name }}
             </span>
 
-            @if ($book->borrowings->first()?->user_id == Auth::user()->id && $book->borrowings->first()->returned_at == null)
-                <flux:button href="{{ route('book.borrow') }}" tooltip="Kelola Buku"
-                    class="h-7! aspect-square p-0! rounded-full! border-none! bg-primary! text-custom-white!">
+            @if ($book->currentBorrowing?->user_id === Auth::id())
+                <flux:button href="{{ route('book.borrow') }}" tooltip="Kelola Buku" wire:navigate
+                    class="h-7! aspect-square p-0! rounded-full! border-none! bg-secondary/80! text-custom-black!">
                     <flux:icon.cog-6-tooth variant="micro" size="6" />
                 </flux:button>
             @endif

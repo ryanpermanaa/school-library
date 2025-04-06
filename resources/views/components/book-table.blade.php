@@ -12,7 +12,7 @@
 
 <tr class="*:text-gray-900">
     <td class="px-3 py-2 whitespace-nowrap pl-4 opacity-40">{{ $book->id }}</td>
-    <td class="px-3 py-2 whitespace-nowrap font-playfair font-bold">
+    <td class="px-3 py-2 whitespace-nowrap font-playfair font-bold flex items-center gap-4">
         <span class="relative group w-fit text-lg">
             {{ $book->title }}
 
@@ -51,9 +51,9 @@
             </p>
         </flux:tooltip>
     </td>
-    <td class="px-3 py-2 whitespace-nowrap pr-4 flex gap-1">
-        <flux:button href="{{ route('book.details', $book->id) }}" icon="eye" class="cursor-pointer transition"
-            size="sm" tooltip="Lihat Detail" :loading="false">
+    <td class="px-3 py-2 whitespace-nowrap pr-4 flex items-center gap-1">
+        <flux:button href="{{ route('book.details', $book->id) }}" wire:navigate icon="eye"
+            class="cursor-pointer transition" size="sm" tooltip="Lihat Detail" :loading="false">
         </flux:button>
         <flux:button icon="arrow-uturn-left" wire:click="returnBook({{ $borrowment->id }})"
             class="cursor-pointer transition hover:bg-primary! hover:text-custom-white!" size="sm"
