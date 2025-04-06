@@ -2,6 +2,7 @@
 
 // use App\Livewire\Explore;
 
+use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\UserBookController;
 use App\Http\Middleware\IsAdminMiddleware;
 use App\Livewire\Settings\Password;
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'admin.'
     ], function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+        Route::resource('kelola-buku', AdminBookController::class);
     });
 
     //? Books

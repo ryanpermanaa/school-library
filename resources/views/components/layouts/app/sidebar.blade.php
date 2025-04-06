@@ -23,7 +23,7 @@
                         wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                         {{ __('Dashboard') }}
                     </flux:navlist.item>
-                    <flux:navlist.item icon="document-text"
+                    <flux:navlist.item icon="document-text" :href="route('admin.kelola-buku.index')" :current="request()->routeIs('admin.kelola-buku.index')"
                         wire:navigate class="mb-2 text-custom-white! hover:text-white/80! data-current:bg-custom-white/10! border-none!">
                         {{ __('Kelola Buku') }}
                     </flux:navlist.item>

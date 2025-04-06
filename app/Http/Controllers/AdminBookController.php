@@ -12,7 +12,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.manage-books.index');
     }
 
     /**
