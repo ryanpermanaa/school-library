@@ -1,9 +1,6 @@
 <x-layouts.app title="Jelajahi" class="">
 
-    <section
-        class="flex flex-col lg:flex-row items-center justify-between gap-7 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
-        <h1 class="text-3xl font-playfair font-bold whitespace-nowrap">Jelajahi Buku</h1>
-
+    <x-page-header title="Jelajahi Buku">
         <form action="{{ route('book.search') }}" method="GET" class="flex gap-2 w-full lg:w-fit">
             <div class="relative w-full md:w-70 rounded-sm">
                 <label for="Search" class="sr-only"> Search </label>
@@ -13,7 +10,8 @@
             <flux:button type="submit" icon="magnifying-glass"
                 class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
         </form>
-    </section>
+    </x-page-header>
+
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-4">
         <div class="flex items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Buku-buku populer</h2>

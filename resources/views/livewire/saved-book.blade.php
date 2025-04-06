@@ -1,16 +1,12 @@
 <div>
 
-    <section
-        class="flex flex-col xl:flex-row  items-center justify-between gap-7 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-3 shadow-lg">
-        <h1 class="text-3xl font-playfair font-bold text-center">Buku yang disimpan</h1>
-
+    <x-page-header title="Buku yang disimpan">
         <div class="flex flex-wrap gap-4">
             <div class="relative w-full lg:w-fit flex bg-[#EEEDEF] border rounded-md shadow text-white text-sm"
                 x-data="{ inputValue: '' }">
                 <div aria-disabled="true" class="text-black w-10 grid place-content-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.3-4.3"></path>
                     </svg>
@@ -38,8 +34,7 @@
                     placeholder="Status Buku" />
             </div>
         </div>
-
-    </section>
+    </x-page-header>
 
     <section class="grid grid-cols-1 xl:grid-cols-2 gap-3 p-5 rounded-lg bg-[#FBFBFB] w-full h-fit mb-3 shadow-lg">
 

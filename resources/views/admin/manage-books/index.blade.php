@@ -1,5 +1,5 @@
 <x-layouts.app title="Kelola Buku" class="">
 
-    <h1>Test</h1>
+    <x-page-header title="Kelola Buku"></x-page-header>
 
 </x-layouts.app>
