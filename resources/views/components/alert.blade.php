@@ -1,7 +1,8 @@
 <div {{ $attributes->merge(['class' => 'absolute right-5 top-5 z-30']) }}
     x-transition:enter="transform transition ease-out duration-300" x-transition:enter-start="translate-x-full opacity-0"
     x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave="transform transition ease-in duration-300"
-    x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0">
+    x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0" x-cloak>
+
     <div class="flex flex-col gap-2 w-fit text-[10px] sm:text-base z-50">
         <div class="error-alert flex items-center justify-between p-3 rounded-lg bg-custom-black">
             <div class="flex gap-2 mr-10">
@@ -30,6 +31,7 @@
                     <p class="text-white/70">{{ $description }}</p>
                 </div>
             </div>
+
             <button class="text-gray-300 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
