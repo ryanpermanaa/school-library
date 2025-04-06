@@ -1,20 +1,19 @@
 <div class="h-full">
 
-    <div class="" x-data="{ hideAlert: false, borrowSuccess: @entangle('borrowSuccess') }" x-init="$watch('borrowSuccess', val => {
-        if (val !== null) {
-            setTimeout(() => hideAlert = true, 10000);
-        }
-    })">
-        <x-alert type="success" x-cloak x-show="(borrowSuccess !== null && borrowSuccess) && !hideAlert">
+
+    <x-alert model="borrowSuccess">
+
+        <x-alert-item type="success" x-show="result === true && !hideAlert">
             <x-slot:title>Buku berhasil dipinjam!</x-slot:title>
             <x-slot:description>Buku bisa dikelola di Buku Dipinjam.</x-slot:description>
-        </x-alert>
+        </x-alert-item>
 
-        <x-alert type="error" x-cloak x-show="(borrowSuccess !== null && !borrowSuccess) && !hideAlert">
+        <x-alert-item type="error" x-show="result === false && !hideAlert">
             <x-slot:title>Buku gagal dipinjam :(</x-slot:title>
             <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
-        </x-alert>
-    </div>
+        </x-alert-item>
+
+    </x-alert>
 
     <section
         class="relative flex flex-col lg:flex-row items-center justify-between p-5 px-6 lg:px-19 rounded-lg bg-[#FBFBFB] w-full min-h-full mb-4 shadow-lg overflow-hidden">

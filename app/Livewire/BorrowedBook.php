@@ -11,6 +11,8 @@ class BorrowedBook extends Component
 {
     use WithPagination;
 
+    public $returnSuccess;
+
     public function returnBook(Borrowing $borrowment)
     {
         if (!Auth::check()) return;
@@ -27,6 +29,11 @@ class BorrowedBook extends Component
         $this->resetPage();
     }
 
+    public function resetAlert()
+    {
+        $this->reset('returnSuccess');
+    }
+
     public function render()
     {
         $borrowings = Borrowing::where('user_id', Auth::user()->id)
@@ -37,6 +44,7 @@ class BorrowedBook extends Component
 
         return view('livewire.borrowed-book', [
             'borrowings' => $borrowings,
+            'returnSuccess' => $this->returnSuccess
         ]);
     }
 }

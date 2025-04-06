@@ -1,4 +1,4 @@
-<x-layouts.app title="Buku Dipinjam" class="">
+<x-layouts.app title="Buku Dipinjam" class="relative overflow-hidden">
 
     <div class="flex flex-col h-full">
         <section
