@@ -5,7 +5,7 @@
         hideAlert = false;
         setTimeout(() => hideAlert = true, 10000);
     }
-})">
+})" class="shadow-xl">
     <div x-cloak x-show="result !== null">
         {{ $slot }}
     </div>

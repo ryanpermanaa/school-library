@@ -26,7 +26,7 @@
                     return clearInterval(interval);
                 }
 
-                const particleCount = 50 * (timeLeft / duration);
+                const particleCount = 20 * (timeLeft / duration);
 
                 // since particles fall down, start a bit higher than random
                 confetti(

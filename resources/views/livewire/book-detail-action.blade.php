@@ -1,6 +1,5 @@
 <div class="h-full">
 
-
     <x-alert model="borrowSuccess">
 
         <x-alert-item type="success" x-show="result === true && !hideAlert">

@@ -1,5 +1,19 @@
 <div class="flex-1">
 
+    <x-alert model="returnSuccess">
+
+        <x-alert-item type="success" x-show="result === true && !hideAlert">
+            <x-slot:title>Buku berhasil dikembalikan!</x-slot:title>
+            <x-slot:description>Buku berhasil dikembalikan ke perpustakaan.</x-slot:description>
+        </x-alert-item>
+
+        <x-alert-item type="error" x-show="result === false && !hideAlert">
+            <x-slot:title>Buku gagal dikembalikan :(</x-slot:title>
+            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+        </x-alert-item>
+
+    </x-alert>
+
     <section class="flex flex-col min-h-full gap-3 p-5 rounded-lg bg-[#FBFBFB] shadow-lg">
 
         <div class="">

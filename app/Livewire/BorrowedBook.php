@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Borrowing;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
 class BorrowedBook extends Component
@@ -17,14 +18,23 @@ class BorrowedBook extends Component
     {
         if (!Auth::check()) return;
 
-        $borrowment->update([
-            'returned_at' => now(),
-            'status' => 'returned'
-        ]);
+        try {
+            $borrowment->update([
+                'returned_at' => now(),
+                'status' => 'returned'
+            ]);
 
-        $borrowment->book->update([
-            'is_available' => true
-        ]);
+            $borrowment->book->update([
+                'is_available' => true
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to return book: ' . $e->getMessage());
+            $this->returnSuccess = false;
+
+            return;
+        }
+
+        $this->returnSuccess = true;
 
         $this->resetPage();
     }
