@@ -5,12 +5,12 @@
             setTimeout(() => hideAlert = true, 10000);
         }
     })">
-        <x-alert type="success" x-cloak x-show="(borrowSuccess === true) && !hideAlert">
+        <x-alert type="success" x-cloak x-show="(borrowSuccess !== null && borrowSuccess) && !hideAlert">
             <x-slot:title>Buku berhasil dipinjam!</x-slot:title>
             <x-slot:description>Buku bisa dikelola di Buku Dipinjam.</x-slot:description>
         </x-alert>
 
-        <x-alert type="error" x-cloak x-show="(borrowSuccess === false) && !hideAlert">
+        <x-alert type="error" x-cloak x-show="(borrowSuccess !== null && !borrowSuccess) && !hideAlert">
             <x-slot:title>Buku gagal dipinjam :(</x-slot:title>
             <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
         </x-alert>

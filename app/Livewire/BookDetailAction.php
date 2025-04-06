@@ -25,6 +25,11 @@ class BookDetailAction extends Component
         }
     }
 
+    public function resetAlert()
+    {
+        $this->reset('borrowSuccess');
+    }
+
     public function likeBook()
     {
         if (!Auth::check()) return;

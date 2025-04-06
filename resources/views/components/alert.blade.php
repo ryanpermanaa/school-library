@@ -32,7 +32,8 @@
                 </div>
             </div>
 
-            <button class="text-gray-300 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear cursor-pointer">
+            <button x-on:click="$wire.resetAlert()"
+                class="text-gray-300 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
