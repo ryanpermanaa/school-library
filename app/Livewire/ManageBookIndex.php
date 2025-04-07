@@ -13,10 +13,10 @@ class ManageBookIndex extends Component
     public function render()
     {
         $this->books = Book::with(['borrowings', 'currentBorrowing', 'likedByUsers', 'dislikedByUsers', 'category'])
-            ->find(1);
+            ->get();
 
         return view('livewire.manage-book-index', [
-            'book' => $this->books
+            'books' => $this->books
         ]);
     }
 }
