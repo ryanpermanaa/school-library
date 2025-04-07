@@ -12,7 +12,7 @@
         </form>
     </x-page-header>
 
-    <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-4">
+    <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-3">
         <div class="flex items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Buku-buku populer</h2>
             <a href="{{ route('book.search') }}?sort=paling+populer"
