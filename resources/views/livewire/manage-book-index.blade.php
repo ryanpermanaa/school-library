@@ -22,7 +22,7 @@
 
                 <tbody class="divide-y divide-gray-200 *:even:bg-gray-100">
                     @foreach ($books as $book)
-                        <x-manage-book-table-item :$book wire:key="manage-book-{{ $book->id }}" />
+                        <x-manage-book-table-item :$book :is-last="$loop->last" wire:key="manage-book-{{ $book->id }}" />
                     @endforeach
                 </tbody>
             </table>

@@ -1,4 +1,4 @@
-@props(['book'])
+@props(['book', 'isLast' => false])
 
 <tr class="*:text-gray-900">
     <td class="px-3 py-2 whitespace-nowrap pl-4 text-center opacity-40">{{ $book->id }}</td>
@@ -57,7 +57,7 @@
                     'fa-solid fa-clock' => $status === 'borrowed',
                     'fa-solid fa-triangle-exclamation' => $status === 'overdue',
                 ])></i>
-                <p class="text-sm font-semibold whitespace-nowrap">
+                <p class="text-xs font-semibold whitespace-nowrap">
                     @if ($status === 'never')
                         Belum Dipinjam
                     @elseif ($status === 'available')
@@ -108,8 +108,8 @@
                     </span>
                 </span>
                 <div class="">
-                    <h4 class="text-lg/tight font-semibold">{{ $user->name }}</h4>
-                    <p class="text-sm/tight opacity-60">
+                    <h4 class="text-base/tight font-semibold">{{ $user->name }}</h4>
+                    <p class="text-xs/tight opacity-70">
                         {{ $user->is_admin ? 'Admin' : 'Regular User' }}</p>
                 </div>
             </div>
@@ -129,17 +129,55 @@
     </td>
 
     <td class="px-3 py-2 whitespace-nowrap">
-        <div class="flex gap-4 w-fit border-2 px-3 py-2 rounded-md">
+        <div class="flex gap-4 w-fit text-sm border-2 px-3 py-2 rounded-md">
             <div class="flex items-center gap-1.5 font-bold text-green-700">
-                <flux:icon.hand-thumb-up variant="mini" />
+                <flux:icon.hand-thumb-up variant="micro" />
                 {{ $book->likedByUsers->count() }}
             </div>
             <div class="flex items-center gap-1.5 font-bold text-red-700">
-                <flux:icon.hand-thumb-down variant="mini" />
+                <flux:icon.hand-thumb-down variant="micro" />
                 {{ $book->dislikedByUsers->count() }}
             </div>
         </div>
     </td>
 
-    <td class="px-3 py-2 whitespace-nowrap pr-4 flex items-center gap-1">[]</td>
+    <td class="px-3 py-2 whitespace-nowrap pr-4 gap-1">
+        <div class="flex items-center gap-2">
+            <flux:button as="link" href="{{ route('book.details', $book->id) }}" wire:navigate>
+                Lihat Detail
+            </flux:button>
+
+            <div class="relative" x-data="{ actionOpen: false }">
+                <flux:button icon="ellipsis-horizontal" class="cursor-pointer" x-on:click="actionOpen = !actionOpen" />
+
+                <div x-cloak x-show="actionOpen" x-transition @click.outside="actionOpen = false"
+                    @class([
+                        'absolute right-0 bg-gray-50 py-2 rounded-lg z-10 shadow-lg',
+                        'top-12' => !$isLast,
+                        'bottom-12' => $isLast,
+                    ])>
+                    <ul class="[&_li]:hover:bg-gray-100 [&_li]:px-4 [&_li]:py-1">
+                        <li>
+                            <button class="cursor-pointer w-full text-start">
+                                <i class="fa-regular fa-circle-check mr-2"></i>
+                                Tandai sudah dikembalikan
+                            </button>
+                        </li>
+                        <li>
+                            <button class="cursor-pointer w-full text-start">
+                                <i class="fa-regular fa-pen-to-square mr-2"></i>
+                                Edit buku
+                            </button>
+                        </li>
+                        <li>
+                            <button class="cursor-pointer w-full text-red-600 text-start">
+                                <i class="fa-regular fa-trash-can mr-2.5"></i>
+                                Hapus buku
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </td>
 </tr>
