@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,7 +13,7 @@ class ManageBookIndex extends Component
 {
     use WithPagination;
 
-    public $returnSuccess;
+    public $returnSuccess, $alertTitle, $alertDescription;
 
     public function markAsReturned(Book $book)
     {
@@ -55,6 +56,18 @@ class ManageBookIndex extends Component
             'dislikedByUsers',
             'category',
         ])->paginate(10);
+
+        if (Session::has('status')) {
+            if (Session::get('status') === "success") {
+                $this->returnSuccess = true;
+                $this->alertTitle = "Buku berhasil diedit!";
+                $this->alertDescription = "Data buku telah berhasil diedit.";
+            } else {
+                $this->returnSuccess = false;
+                $this->alertTitle = "Buku gagal diedit :(";
+                $this->alertDescription = "Coba lagi nanti atau hubungi developer.";
+            }
+        }
 
         return view('livewire.manage-book-index', [
             'books' => $books

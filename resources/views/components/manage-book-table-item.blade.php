@@ -160,10 +160,11 @@
                             </li>
                         @endif
                         <li>
-                            <button class="cursor-pointer w-full text-start">
+                            <a href="{{ route('admin.kelola-buku.edit', $book->id) }}" wire:navigate
+                                class="block cursor-pointer w-full text-start">
                                 <i class="fa-regular fa-pen-to-square mr-2"></i>
                                 Edit buku
-                            </button>
+                            </a>
                         </li>
                         <li>
                             <button class="cursor-pointer w-full text-red-600 text-start">

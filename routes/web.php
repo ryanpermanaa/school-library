@@ -28,12 +28,9 @@ Route::middleware(['auth'])->group(function () {
     ], function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
 
-        Route::controller(AdminBookController::class)
-            ->name('kelola-buku.')
-            ->group(function () {
-                Route::get('/kelola-buku', 'index')->name('index');
-                Route::get('/kelola-buku/tambah', 'create')->name('create');
-            });
+        Route::view('/kelola-buku', 'admin.manage-books.index')->name('kelola-buku.index');
+        Route::view('/kelola-buku/tambah', 'admin.manage-books.add')->name('kelola-buku.create');
+        Route::view('/kelola-buku/{book}/edit', 'admin.manage-books.edit')->name('kelola-buku.edit');
     });
 
     //? Books

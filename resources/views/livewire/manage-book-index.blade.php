@@ -3,13 +3,21 @@
     <x-alert model="returnSuccess">
 
         <x-alert-item type="success" x-show="result === true && !hideAlert">
-            <x-slot:title>Buku berhasil dikembalikan!</x-slot:title>
-            <x-slot:description>Buku berhasil dikembalikan ke perpustakaan.</x-slot:description>
+            <x-slot:title>
+                {{ $alertTitle ?? 'Buku berhasil dikembalikan!' }}
+            </x-slot:title>
+            <x-slot:description>
+                {{ $alertDescription ?? 'Buku berhasil dikembalikan ke perpustakaan.' }}
+            </x-slot:description>
         </x-alert-item>
 
         <x-alert-item type="error" x-show="result === false && !hideAlert">
-            <x-slot:title>Buku gagal dikembalikan :(</x-slot:title>
-            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+            <x-slot:title>
+                {{ $alertTitle ?? 'Buku gagal dikembalikan :(' }}
+            </x-slot:title>
+            <x-slot:description>
+                {{ $alertDescription ?? 'Coba lagi nanti atau hubungi developer.' }}
+            </x-slot:description>
         </x-alert-item>
 
     </x-alert>

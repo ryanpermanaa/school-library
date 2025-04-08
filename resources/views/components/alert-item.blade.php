@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'absolute right-5 top-5 z-30']) }}
+<div {{ $attributes->merge(['class' => 'fixed right-5 top-5 z-30']) }}
     x-transition:enter="transform transition ease-out duration-300" x-transition:enter-start="translate-x-full opacity-0"
     x-transition:enter-end="translate-x-0 opacity-100" x-transition:leave="transform transition ease-in duration-300"
     x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0" x-cloak>
