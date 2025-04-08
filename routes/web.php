@@ -27,17 +27,26 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'admin.'
     ], function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
-        Route::resource('kelola-buku', AdminBookController::class);
+
+        Route::controller(AdminBookController::class)
+            ->name('kelola-buku.')
+            ->group(function () {
+                Route::get('/kelola-buku', 'index')->name('index');
+                Route::get('/kelola-buku/tambah', 'create')->name('create');
+            });
     });
 
     //? Books
-    Route::group(['prefix' => 'buku', 'as' => 'book.'], function () {
-        Route::get('jelajahi', [UserBookController::class, 'explore'])->name('explore');
-        Route::get('cari', [UserBookController::class, 'search'])->name('search');
-        Route::get('detail/{id}', [UserBookController::class, 'view'])->name('details');
-        Route::get('dipinjam', [UserBookController::class, 'borrow'])->name('borrow');
-        Route::get('disimpan', [UserBookController::class, 'saved'])->name('saved');
-    });
+    Route::prefix('buku')
+        ->name('book.')
+        ->controller(UserBookController::class)
+        ->group(function () {
+            Route::get('jelajahi', 'explore')->name('explore');
+            Route::get('cari', 'search')->name('search');
+            Route::get('detail/{id}', 'view')->name('details');
+            Route::get('dipinjam', 'borrow')->name('borrow');
+            Route::get('disimpan', 'saved')->name('saved');
+        });
 });
 
 require __DIR__ . '/auth.php';

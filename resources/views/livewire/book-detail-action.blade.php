@@ -31,12 +31,7 @@
                 {{ $book->title }}</h2>
             <p class="text-lg mb-5">Oleh <span class="capitalize font-semibold">{{ $book->author }}</span></p>
 
-            <p class="font-crimson text-xl font-light max-w-lg mb-5 text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta numquam quisquam pariatur eos. Enim
-                aut
-                repellendus, at rem perferendis assumenda nobis officiis officia sequi delectus voluptate. Nulla
-                consequatur expedita ullam!
-            </p>
+            <p class="font-crimson text-xl font-light max-w-lg mb-5 text-justify">{{ $book->description }}</p>
 
             <flux:separator class="mb-5" />
 

@@ -1,7 +1,23 @@
 <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
 
+    <x-alert model="createSuccess">
+
+        <x-alert-item type="success" x-show="result === true && !hideAlert">
+            <x-slot:title>Buku berhasil ditambahkan!</x-slot:title>
+            <x-slot:description>Buku berhasil ditambahkan ke data.</x-slot:description>
+        </x-alert-item>
+
+        <x-alert-item type="error" x-show="result === false && !hideAlert">
+            <x-slot:title>Buku gagal ditambahkan :(</x-slot:title>
+            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+        </x-alert-item>
+
+    </x-alert>
+
     <div class="w-full">
-        <form class="">
+        <form action="" method="POST" wire:submit="submit" class="">
+            @csrf
+
             <div class="flex flex-col md:flex-row gap-5 w-full">
                 <div class="space-y-4 flex-1">
                     <div>
@@ -11,7 +27,7 @@
                         <div class="mt-2">
                             <input placeholder="Judul dari buku" type="text"
                                 class="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="book-title" name="title" />
+                                id="book-title" wire:model="title" required />
                         </div>
                         @error('title')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -24,7 +40,7 @@
                         <div class="mt-2">
                             <input placeholder="Penulis buku" type="text"
                                 class="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="book-author" name="author" />
+                                id="book-author" wire:model="author" required />
                         </div>
                         @error('author')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -37,7 +53,7 @@
                         <div class="mt-2">
                             <textarea placeholder="Deskripsi singkat buku" type="text"
                                 class="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="book-description" name="description" rows="6"></textarea>
+                                id="book-description" wire:model="description" rows="6" required></textarea>
                         </div>
                         @error('description')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -50,18 +66,18 @@
                             Kategory
                         </label>
                         <div class="mt-2">
-                            <select name="category" id="book-category"
+                            <select wire:model="category_id" id="book-category"
                                 class="mt-0.5 px-2 py-2 w-full rounded border border-gray-300 shadow-sm sm:text-sm">
                                 <option value="">Pilih Kategori</option>
 
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category }}">
-                                        {{ ucfirst($category) }}
+                                    <option value="{{ $category->id }}">
+                                        {{ ucfirst($category->name) }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        @error('category')
+                        @error('category_id')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
@@ -72,22 +88,24 @@
                         <div class="w-full mt-2">
                             <div
                                 class="relative h-40 rounded-lg border-2 bg-gray-50 flex justify-center items-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                                <div class="absolute flex flex-col items-center">
+                                <div class="absolute inset-3 flex flex-col items-center">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 283.465 283.465"
-                                        viewBox="0 0 283.465 283.465" width="70" class="mb-2" id="png-file">
-                                        <polygon fill="#C3AFF1" fill-rule="evenodd"
-                                            points="171.886 33.694 58.962 33.694 58.962 264.073 231.001 264.073 231.001 91.412"
-                                            clip-rule="evenodd"></polygon>
-                                        <path d="M216.845,252.771H44.539c-0.797,0-1.562-0.317-2.124-0.882c-0.563-0.564-0.878-1.329-0.876-2.127l0.638-230.378
+                                    @if (!$cover_path)
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            enable-background="new 0 0 283.465 283.465" viewBox="0 0 283.465 283.465"
+                                            width="70" class="mb-2" id="png-file">
+                                            <polygon fill="#C3AFF1" fill-rule="evenodd"
+                                                points="171.886 33.694 58.962 33.694 58.962 264.073 231.001 264.073 231.001 91.412"
+                                                clip-rule="evenodd"></polygon>
+                                            <path d="M216.845,252.771H44.539c-0.797,0-1.562-0.317-2.124-0.882c-0.563-0.564-0.878-1.329-0.876-2.127l0.638-230.378
    c0.005-1.653,1.347-2.992,3-2.992h112.81c0.796,0,1.559,0.316,2.121,0.879l59.181,59.18c0.564,0.564,0.881,1.33,0.879,2.127
    l-0.141,70.059c-0.003,1.655-1.346,2.994-3,2.994c-0.002,0-0.004,0-0.006,0c-1.657-0.004-2.997-1.35-2.994-3.006l0.139-68.813
    l-57.421-57.42H48.168l-0.621,224.379h166.307l0.018-6.256c0.005-1.653,1.347-2.991,3-2.991c0.003,0,0.006,0,0.009,0
    c1.656,0.005,2.996,1.352,2.991,3.009l-0.026,9.247C219.84,251.433,218.498,252.771,216.845,252.771z"></path>
-                                        <path
-                                            d="M217.167 81.571h-39.781c-12.351 0-22.399-10.048-22.399-22.399V19.392c0-1.213.731-2.307 1.852-2.771 1.125-.465 2.412-.208 3.27.65l59.181 59.18c.858.858 1.115 2.148.65 3.269C219.474 80.84 218.38 81.571 217.167 81.571zM160.986 26.634v32.539c0 9.042 7.356 16.399 16.399 16.399h32.539L160.986 26.634zM235.602 229.796H119.006c-3.486 0-6.322-2.836-6.322-6.322v-57.793c0-3.486 2.836-6.323 6.322-6.323h116.597c3.486 0 6.323 2.837 6.323 6.323v57.793C241.926 226.96 239.089 229.796 235.602 229.796zM119.006 165.357c-.172 0-.322.151-.322.323v57.793c0 .172.15.322.322.322h116.597c.172 0 .323-.15.323-.322v-57.793c0-.172-.151-.323-.323-.323H119.006z">
-                                        </path>
-                                        <path fill-rule="evenodd" d="M145.188,201.224h-3.445c-0.263,0-0.487,0.092-0.671,0.276
+                                            <path
+                                                d="M217.167 81.571h-39.781c-12.351 0-22.399-10.048-22.399-22.399V19.392c0-1.213.731-2.307 1.852-2.771 1.125-.465 2.412-.208 3.27.65l59.181 59.18c.858.858 1.115 2.148.65 3.269C219.474 80.84 218.38 81.571 217.167 81.571zM160.986 26.634v32.539c0 9.042 7.356 16.399 16.399 16.399h32.539L160.986 26.634zM235.602 229.796H119.006c-3.486 0-6.322-2.836-6.322-6.322v-57.793c0-3.486 2.836-6.323 6.322-6.323h116.597c3.486 0 6.323 2.837 6.323 6.323v57.793C241.926 226.96 239.089 229.796 235.602 229.796zM119.006 165.357c-.172 0-.322.151-.322.323v57.793c0 .172.15.322.322.322h116.597c.172 0 .323-.15.323-.322v-57.793c0-.172-.151-.323-.323-.323H119.006z">
+                                            </path>
+                                            <path fill-rule="evenodd" d="M145.188,201.224h-3.445c-0.263,0-0.487,0.092-0.671,0.276
    c-0.184,0.184-0.276,0.408-0.276,0.67v5.878c0,0.263-0.092,0.486-0.276,0.671c-0.184,0.184-0.401,0.276-0.664,0.276h-5.93
    c-0.263,0-0.48-0.092-0.664-0.276c-0.184-0.184-0.276-0.408-0.276-0.671v-26.982c0-0.263,0.092-0.486,0.276-0.67
    c0.184-0.184,0.408-0.276,0.67-0.276h12.071c1.473,0,2.86,0.276,4.162,0.828c1.302,0.552,2.433,1.315,3.393,2.288
@@ -118,30 +136,40 @@
    c0.197,0.171,0.309,0.401,0.335,0.69c0.053,0.447,0.079,0.993,0.079,1.637s-0.04,1.308-0.118,1.992
    c-0.184,1.814-0.697,3.498-1.538,5.049c-0.842,1.552-1.926,2.893-3.255,4.023c-1.328,1.131-2.847,2.019-4.556,2.663
    C210.446,209.186,208.632,209.508,206.712,209.508z" clip-rule="evenodd"></path>
-                                    </svg>
+                                        </svg>
 
-                                    <span class="block text-gray-500 font-semibold">
-                                        Drag &amp; Drop gambar disini
-                                    </span>
-                                    <span class="block text-gray-400 font-normal mt-0.5">
-                                        Atau klik untuk upload
-                                    </span>
+                                        <span class="block text-gray-500 font-semibold">
+                                            Drag &amp; Drop gambar disini
+                                        </span>
+                                        <span class="block text-gray-400 font-normal mt-0.5">
+                                            Atau klik untuk upload
+                                        </span>
+                                    @else
+                                        <img src="{{ $cover_path->temporaryUrl() }}" alt=""
+                                            class="w-20 shadow-3xl">
+                                    @endif
+
+                                    <div wire:loading wire:target="cover_path" class="absolute inset-0 bg-gray-50">
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-10 h-10 border-4 border-t-primary border-gray-300 rounded-full animate-spin">
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <input name="image" id="book-image" class="h-full w-full opacity-0 cursor-pointer"
-                                    type="file" />
+                                <input wire:model="cover_path" id="book-image" accept="image/png, image/jpeg"
+                                    class="h-full w-full opacity-0 cursor-pointer" type="file" required />
                             </div>
-                            @error('image')
+                            @error('cover_path')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
                     <div>
-                        <button
-                            class="inline-flex w-full items-center justify-center rounded-md bg-primary px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#593B9D] transition cursor-pointer"
-                            type="button">
+                        <flux:button type="submit"
+                            class="w-full h-fit! py-2.5 rounded-md bg-primary! text-custom-white! text-lg font-semibold hover:bg-[#593B9D]! transition cursor-pointer">
                             Konfirmasi Upload Buku
-                        </button>
+                        </flux:button>
                     </div>
                 </div>
             </div>

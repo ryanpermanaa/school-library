@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminBookController extends Controller
 {
@@ -12,6 +13,7 @@ class AdminBookController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->is_admin) abort(403);
         return view('admin.manage-books.index');
     }
 
@@ -20,45 +22,14 @@ class AdminBookController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->is_admin) abort(403);
         return view('admin.manage-books.add');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Book $book)
-    {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Book $book)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Book $book)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Book $book)
     {
         //
     }
