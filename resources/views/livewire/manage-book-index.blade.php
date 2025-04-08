@@ -8,15 +8,15 @@
         ])>
             <table class="table-auto w-full text-base">
                 <thead
-                    class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-20 before:absolute before:inset-0 before:bg-[#E9E0FF] before:rounded-tl-md rounded-tr-md before:-z-10">
+                    class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-20 before:absolute before:inset-0 before:bg-[#F0EBFD] before:rounded-tl-md rounded-tr-md before:-z-10">
                     <tr class="*:font-semibold *:text-primary text-base">
-                        <th class="px-3 py-3 whitespace-nowrap pl-4 text-center">ID</th>
-                        <th class="px-3 py-3 whitespace-nowrap">Tentang Buku</th>
-                        <th class="px-3 py-3 whitespace-nowrap">Status</th>
-                        <th class="px-3 py-3 whitespace-nowrap">Dipinjam Oleh</th>
-                        <th class="px-3 py-3 whitespace-nowrap">Tgl. Tenggat</th>
-                        <th class="px-3 py-3 whitespace-nowrap">Reputasi</th>
-                        <th class="px-3 py-3 whitespace-nowrap pr-4">Aksi</th>
+                        <th class="px-3 py-5 whitespace-nowrap pl-4 text-center">ID</th>
+                        <th class="px-3 py-5 whitespace-nowrap">Tentang Buku</th>
+                        <th class="px-3 py-5 whitespace-nowrap">Status</th>
+                        <th class="px-3 py-5 whitespace-nowrap">Dipinjam Oleh</th>
+                        <th class="px-3 py-5 whitespace-nowrap">Tgl. Tenggat</th>
+                        <th class="px-3 py-5 whitespace-nowrap">Reputasi</th>
+                        <th class="px-3 py-5 whitespace-nowrap pr-4">Aksi</th>
                     </tr>
                 </thead>
 
