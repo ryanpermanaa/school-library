@@ -41,6 +41,11 @@ class ManageBookIndex extends Component
         $this->resetPage();
     }
 
+    public function resetAlert()
+    {
+        $this->reset('returnSuccess');
+    }
+
     public function render()
     {
         $books = Book::with([
@@ -49,7 +54,7 @@ class ManageBookIndex extends Component
             'likedByUsers',
             'dislikedByUsers',
             'category',
-        ])->paginate(2);
+        ])->paginate(10);
 
         return view('livewire.manage-book-index', [
             'books' => $books

@@ -20,7 +20,7 @@ class AdminBookController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.manage-books.add');
     }
 
     /**

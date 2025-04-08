@@ -1,4 +1,4 @@
-<x-layouts.app title="Kelola Buku" class="relative">
+<x-layouts.app title="Kelola Buku" class="relative overflow-x-hidden">
 
     <x-page-header title="Kelola Buku">
         <flux:button as="link" wire:navigate icon="plus" class="bg-primary! text-custom-white!">Tambah Buku
