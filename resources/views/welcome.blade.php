@@ -74,6 +74,7 @@
                 </a>
             </div>
         </div>
+
         <div x-data="{}" x-init="$nextTick(() => {
             let ul = $refs.books;
             ul.insertAdjacentHTML('afterend', ul.outerHTML);
@@ -81,43 +82,13 @@
         })" class="w-full overflow-x-hidden inline-flex flex-nowrap">
             <ul x-ref="books"
                 class="flex items-center justify-center md:justify-start [&_li]:mx-3 animate-[infiniteScroll_40s_linear_infinite]">
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-                <li>
-                    <div class="book-cover-display">
-                        <img
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images" />
-                    </div>
-                </li>
-
+                @foreach ($books as $book)
+                    <li>
+                        <div class="book-cover-display">
+                            <img src="{{ $book->cover_path }}" alt="Cover buku dengan judul {{ $book->title }}" />
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </section>
@@ -193,34 +164,16 @@
             </p>
             <div
                 class="flex flex-wrap justify-center items-start gap-4 [&>div]:w-62 [&>div>div]:hover:scale-105 [&>div>div]:transition [&>div>div]:mb-5 [&_p]:leading-6 [&_p]:font-crimson [&_p]:font-bold [&_p]:text-xl [&_p]:text-center">
-                <div>
-                    <div class="mx-auto book-cover-display new-badge">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
-                            alt="">
-                    </div>
-                    <p>A History of China</p>
-                </div>
-                <div>
-                    <div class="mx-auto book-cover-display new-badge">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
-                            alt="">
-                    </div>
-                    <p>Agrobisnis Budidaya Lidah Buaya</p>
-                </div>
-                <div>
-                    <div class="mx-auto book-cover-display new-badge">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
-                            alt="">
-                    </div>
-                    <p>Aku bisa jika aku berpikir bisa</p>
-                </div>
-                <div>
-                    <div class="mx-auto book-cover-display new-badge">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.0lhZw7B4IUdvekIJNPpMDwHaLF%26pid%3DApi&f=1&ipt=db0b6ef62ce411dd13450f4bad50598906dc654d770274ed37c03116c83f70c0&ipo=images"
-                            alt="">
-                    </div>
-                    <p>Aku memilih bahagia</p>
-                </div>
+
+                @foreach ($latest_books as $book)
+                    <a class="flex-1" href="{{ route('book.details', $book->id) }}">
+                        <div class="mx-auto book-cover-display new-badge mb-5 hover:scale-105 transition">
+                            <img src="{{ $book->cover_path }}" alt="Cover buku dengan judul {{ $book->title }}">
+                        </div>
+                        <p>{{ $book->title }}</p>
+                    </a>
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -254,8 +207,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.github.com/ryanpermanaa/" rel="noreferrer" target="_blank"
-                        class="text-2xl">
+                    <a href="https://www.github.com/ryanpermanaa/" rel="noreferrer" target="_blank" class="text-2xl">
                         <span class="sr-only">Twitter</span>
                         <i class="fa-brands fa-github"></i>
                     </a>

@@ -2,16 +2,14 @@
 
 // use App\Livewire\Explore;
 
-use App\Http\Controllers\AdminBookController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserBookController;
 use App\Http\Middleware\IsAdminMiddleware;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
 
