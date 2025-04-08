@@ -3,20 +3,56 @@
 namespace App\Livewire;
 
 use App\Models\Book;
-use App\Models\Borrowing;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ManageBookIndex extends Component
 {
-    public $books;
+    use WithPagination;
+
+    public $returnSuccess;
+
+    public function markAsReturned(Book $book)
+    {
+        if (! Auth::check() || $book->currentBorrowing === null) {
+            $this->returnSuccess = false;
+            return;
+        }
+
+        try {
+            $book->currentBorrowing?->update([
+                'returned_at' => now(),
+                'status' => 'returned'
+            ]);
+
+            $book->update(['is_available' => true]);
+
+            $this->returnSuccess = true;
+        } catch (\Throwable $e) {
+            Log::error("Failed to return book #$book->id: " . $e->getMessage());
+            $this->returnSuccess = false;
+
+            return;
+        }
+
+
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $this->books = Book::with(['borrowings', 'currentBorrowing', 'likedByUsers', 'dislikedByUsers', 'category'])
-            ->get();
+        $books = Book::with([
+            'borrowings' => fn($q) => $q->orderByDesc('borrowed_at'),
+            'currentBorrowing.user',
+            'likedByUsers',
+            'dislikedByUsers',
+            'category',
+        ])->paginate(2);
 
         return view('livewire.manage-book-index', [
-            'books' => $this->books
+            'books' => $books
         ]);
     }
 }

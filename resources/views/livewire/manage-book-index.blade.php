@@ -1,6 +1,24 @@
 <div class="">
 
+    <x-alert model="returnSuccess">
+
+        <x-alert-item type="success" x-show="result === true && !hideAlert">
+            <x-slot:title>Buku berhasil dikembalikan!</x-slot:title>
+            <x-slot:description>Buku berhasil dikembalikan ke perpustakaan.</x-slot:description>
+        </x-alert-item>
+
+        <x-alert-item type="error" x-show="result === false && !hideAlert">
+            <x-slot:title>Buku gagal dikembalikan :(</x-slot:title>
+            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+        </x-alert-item>
+
+    </x-alert>
+
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
+
+        <div class="mb-4">
+            {{ $books->links(data: ['scrollTo' => false]) }}
+        </div>
 
         <div @class([
             'w-full overflow-x-auto overflow-y-hidden flex-1 shadow-md rounded-md',
@@ -8,7 +26,7 @@
         ])>
             <table class="table-auto w-full text-base">
                 <thead
-                    class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-20 before:absolute before:inset-0 before:bg-[#F0EBFD] before:rounded-tl-md rounded-tr-md before:-z-10">
+                    class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-10 before:absolute before:inset-0 before:bg-[#F0EBFD] before:rounded-tl-md rounded-tr-md before:-z-10">
                     <tr class="*:font-semibold *:text-primary text-base">
                         <th class="px-3 py-5 whitespace-nowrap pl-4 text-center">ID</th>
                         <th class="px-3 py-5 whitespace-nowrap">Tentang Buku</th>

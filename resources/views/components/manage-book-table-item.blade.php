@@ -20,13 +20,11 @@
 
     <td class="px-3 py-2 whitespace-nowrap">
         @php
-            $hasNeverBorrowed = app\Models\Borrowing::where('book_id', $book->id)->doesntExist();
+            $hasNeverBorrowed = $book->borrowings->isEmpty();
             $isAvailable = $book->is_available;
             $isOverdue = \Carbon\Carbon::parse($book->currentBorrowing?->due_date)->lessThan(now());
 
-            $returnedDate = Carbon\Carbon::parse(
-                $book->borrowings()->latest()->first()?->returned_at,
-            )->translatedFormat('d/m/Y');
+            $returnedDate = Carbon\Carbon::parse($book->borrowings->first()?->returned_at)->translatedFormat('d/m/Y');
             $currentBorrowing = $book->currentBorrowing;
 
             if ($hasNeverBorrowed) {
@@ -71,7 +69,7 @@
             </span>
 
             <div x-cloak x-show="openTooltip" x-transition.opacity
-                class="absolute -top-8 left-1/2 -translate-x-1/2 bg-zinc-800 text-white text-xs py-1.5 px-2 rounded-md whitespace-nowrap">
+                class="absolute z-10 -top-8 left-1/2 -translate-x-1/2 bg-zinc-800 text-white text-xs py-1.5 px-2 rounded-md whitespace-nowrap">
 
                 @if ($status === 'available')
                     Dikembalikkan <span class="font-semibold">{{ $returnedDate }}</span>
@@ -94,27 +92,22 @@
     </td>
 
     <td class="px-3 py-2 whitespace-nowrap">
-
         @if ($currentBorrowing !== null)
-            @php
-                $user = $book->currentBorrowing->user;
-            @endphp
-
             <div class="flex items-center gap-2">
                 <span class="relative flex h-8 aspect-square shrink-0 overflow-hidden rounded-xs">
                     <span
                         class="flex font-bold h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                        {{ auth()->user()->initials() }}
+                        {{ $book->currentBorrowing->user->initials() }}
                     </span>
                 </span>
                 <div class="">
-                    <h4 class="text-base/tight font-semibold">{{ $user->name }}</h4>
+                    <h4 class="text-base/tight font-semibold">{{ $book->currentBorrowing->user->name }}</h4>
                     <p class="text-xs/tight opacity-70">
-                        {{ $user->is_admin ? 'Admin' : 'Regular User' }}</p>
+                        {{ $book->currentBorrowing->user->is_admin ? 'Admin' : 'Regular User' }}</p>
                 </div>
             </div>
         @else
-            &HorizontalLine;
+            -
         @endif
     </td>
 
@@ -124,7 +117,7 @@
                 <p>{{ \Carbon\Carbon::parse($currentBorrowing->due_date)->translatedFormat('l, j F Y') }}</p>
             </flux:tooltip>
         @else
-            &HorizontalLine;
+            -
         @endif
     </td>
 
@@ -156,13 +149,16 @@
                         'top-12' => !$isLast,
                         'bottom-12' => $isLast,
                     ])>
-                    <ul class="[&_li]:hover:bg-gray-100 [&_li]:px-4 [&_li]:py-1">
-                        <li>
-                            <button class="cursor-pointer w-full text-start">
-                                <i class="fa-regular fa-circle-check mr-2"></i>
-                                Tandai sudah dikembalikan
-                            </button>
-                        </li>
+                    <ul class="[&_li]:hover:bg-gray-100 [&_li]:px-4 [&_li]:py-1 min-w-52">
+                        @if (in_array($status, ['borrowed', 'overdue']))
+                            <li>
+                                <button class="cursor-pointer w-full text-start"
+                                    x-on:click="$wire.markAsReturned({{ $book->id }})">
+                                    <i class="fa-regular fa-circle-check mr-2"></i>
+                                    Tandai sudah dikembalikan
+                                </button>
+                            </li>
+                        @endif
                         <li>
                             <button class="cursor-pointer w-full text-start">
                                 <i class="fa-regular fa-pen-to-square mr-2"></i>
