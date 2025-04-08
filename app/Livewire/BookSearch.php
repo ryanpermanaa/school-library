@@ -40,7 +40,7 @@ class BookSearch extends Component
 
     public function mount()
     {
-        $this->key = request()->query('key');
+        $this->key = request()->query('key') ?? "";
 
         $categories = request()->query('category');
         $this->selectedCategories = $categories ? explode(',', $categories) : [];
