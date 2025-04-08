@@ -3,6 +3,7 @@
 <tr class="*:text-gray-900">
     <td class="px-3 py-2 whitespace-nowrap pl-4 text-center opacity-40">{{ $book->id }}</td>
 
+    {{-- ? Book Description --}}
     <td class="px-3 py-2 whitespace-nowrap pl-4 flex items-center">
         <div class="flex items-center">
             <img src="{{ $book->cover_path }}" class="w-12 h-fit mr-4 shadow-3xl" alt="">
@@ -18,6 +19,7 @@
         </div>
     </td>
 
+    {{-- ? Book Status --}}
     <td class="px-3 py-2 whitespace-nowrap">
         @php
             $hasNeverBorrowed = $book->borrowings->isEmpty();
@@ -91,6 +93,7 @@
 
     </td>
 
+    {{-- ? Book Borrower --}}
     <td class="px-3 py-2 whitespace-nowrap">
         @if ($currentBorrowing !== null)
             <div class="flex items-center gap-2">
@@ -111,6 +114,7 @@
         @endif
     </td>
 
+    {{-- ? Due Date --}}
     <td class="px-3 py-2 whitespace-nowrap">
         @if ($currentBorrowing !== null)
             <flux:tooltip content="{{ \Carbon\Carbon::parse($currentBorrowing->due_date)->diffForHumans() }}">
@@ -121,6 +125,7 @@
         @endif
     </td>
 
+    {{-- ? Reputation --}}
     <td class="px-3 py-2 whitespace-nowrap">
         <div class="flex gap-4 w-fit text-sm border-2 px-3 py-2 rounded-md">
             <div class="flex items-center gap-1.5 font-bold text-green-700">
@@ -134,6 +139,7 @@
         </div>
     </td>
 
+    {{-- ? Book Action --}}
     <td class="px-3 py-2 whitespace-nowrap pr-4 gap-1">
         <div class="flex items-center gap-2">
             <flux:button as="link" href="{{ route('book.details', $book->id) }}" wire:navigate>
@@ -167,7 +173,9 @@
                             </a>
                         </li>
                         <li>
-                            <button class="cursor-pointer w-full text-red-600 text-start">
+                            <button x-on:click="deleteModal = true; bookTitle = '{{ $book->title }}'"
+                                wire:click="$set('selectedBook', {{ $book->id }})"
+                                class="cursor-pointer w-full text-red-600 text-start">
                                 <i class="fa-regular fa-trash-can mr-2.5"></i>
                                 Hapus buku
                             </button>

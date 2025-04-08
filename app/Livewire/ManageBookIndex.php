@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,10 +15,11 @@ class ManageBookIndex extends Component
     use WithPagination;
 
     public $returnSuccess, $alertTitle, $alertDescription;
+    public $selectedBook;
 
     public function markAsReturned(Book $book)
     {
-        if (! Auth::check() || $book->currentBorrowing === null) {
+        if (!Auth::user()->is_admin || $book->currentBorrowing === null) {
             $this->returnSuccess = false;
             return;
         }
@@ -38,6 +40,40 @@ class ManageBookIndex extends Component
             return;
         }
 
+        $this->resetPage();
+    }
+
+    public function deleteBook()
+    {
+        if (!Auth::user()->is_admin) return;
+
+        $book = Book::find($this->selectedBook);
+
+        if ($book) {
+            try {
+                if ($book->cover_path) {
+                    $path = str_replace(asset('storage') . '/', '', $book->cover_path);
+                    Storage::disk('public')->delete($path);
+                }
+
+                $book->delete();
+
+                $this->returnSuccess = true;
+                $this->alertTitle = "Berhasil menghapus buku!";
+                $this->alertDescription = "Buku telah dihapus dari data.";
+            } catch (\Exception $e) {
+                Log::error("Failed to delete book #$book->id: " . $e->getMessage());
+                $this->returnSuccess = false;
+                $this->alertTitle = "Gagal menghapus buku :(";
+                $this->alertDescription = "Coba lagi nanti atau hubungi developer.";
+                return;
+            }
+        } else {
+            $this->returnSuccess = false;
+            $this->alertTitle = "Gagal menghapus buku :(";
+            $this->alertDescription = "Coba lagi nanti atau hubungi developer.";
+            return;
+        }
 
         $this->resetPage();
     }
