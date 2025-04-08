@@ -26,6 +26,7 @@ class BookSearch extends Component
     public $statusType = '';
 
     protected $queryString = [
+        'key',
         'categoriesStr' => [
             'as' => 'category',
         ],
