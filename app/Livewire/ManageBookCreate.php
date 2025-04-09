@@ -54,7 +54,7 @@ class ManageBookCreate extends Component
 
     public function resetAlert()
     {
-        $this->reset('returnSuccess');
+        $this->reset('createSuccess');
     }
 
     public function render()
