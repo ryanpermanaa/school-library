@@ -37,8 +37,9 @@ class BookDetailAction extends Component
     {
         if (!Auth::check()) return;
 
-        $user = Auth::user()->load(['likedBooks']);
-        $user->likedBooks()->toggle($this->book->id);
+        $user = Auth::user();
+        $user->load('likedBooks')->likedBooks()->toggle($this->book->id);
+        $user->load('dislikedBooks')->dislikedBooks()->toggle($this->book->id);
     }
 
 
@@ -46,8 +47,9 @@ class BookDetailAction extends Component
     {
         if (!Auth::check()) return;
 
-        $user = Auth::user()->load(['savedBooks']);
-        $user->savedBooks()->toggle($this->book->id);
+        $user = Auth::user();
+        $user->load('dislikedBooks')->savedBooks()->toggle($this->book->id);
+        $user->load('likedBooks')->likedBooks()->toggle($this->book->id);
     }
 
     public function borrowBook()

@@ -16,7 +16,7 @@
         <span class="relative group w-fit text-lg" x-on:mouseover="hover = true" x-on:mouseout="hover = false">
             {{ $book->title }}
 
-            <div x-show="hover" x-transition
+            <div x-cloak x-show="hover" x-transition
                 class="absolute bottom-1/2 translate-y-1/2 -right-36 z-30 w-28 bg-gray-300 p-2 shadow-2xl">
                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="triangle" x="0" y="0" version="1.1"
                     viewBox="0 0 20 20" class="absolute -left-7 top-1/2 -translate-y-1/2 size-12" fill="#d1d5dc">
@@ -55,9 +55,11 @@
         <flux:button href="{{ route('book.details', $book->id) }}" wire:navigate icon="eye"
             class="cursor-pointer transition" size="sm" tooltip="Lihat Detail" :loading="false">
         </flux:button>
-        <flux:button icon="arrow-uturn-left" wire:click="returnBook({{ $borrowment->id }})"
+        <flux:button
+            x-on:click="$wire.set('selectedBook', {{ $book->id }}); $wire.returnBook('{{ $borrowment->id }}'); ratingModal = true;"
             class="cursor-pointer transition hover:bg-primary! hover:text-custom-white!" size="sm"
-            tooltip="Kembalikan Buku" :loading="false">
+            :loading="false">
+            Kembalikan
         </flux:button>
     </td>
 </tr>

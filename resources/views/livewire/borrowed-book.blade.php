@@ -1,4 +1,4 @@
-<div class="flex-1">
+<div class="flex-1" x-data="{ ratingModal: false }">
 
     <x-alert model="returnSuccess">
 
@@ -8,11 +8,71 @@
         </x-alert-item>
 
         <x-alert-item type="error" x-show="result === false && !hideAlert">
-            <x-slot:title>Buku gagal dikembalikan :(</x-slot:title>
-            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+            <x-slot:title>
+                {{ $alertTitle ?? 'Buku gagal dikembalikan :(' }}
+            </x-slot:title>
+            <x-slot:description>
+                Coba lagi nanti atau hubungi developer.
+            </x-slot:description>
         </x-alert-item>
 
     </x-alert>
+
+    <div x-cloak x-show="ratingModal && $wire.selectedBook !== null" x-transition.opacity
+        class="fixed inset-0 bg-black/20 bg-opacity-75 transition-opacity z-20"></div>
+
+    <div x-cloak x-show="ratingModal && $wire.selectedBook !== null" x-transition
+        class="fixed left-[240px] inset-0 overflow-y-auto z-20">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                @click.away="ratingModal = false">
+                <div class="p-4 sm:p-10 text-center overflow-y-auto">
+                    <div x-on:click="ratingModal = false"
+                        class="absolute right-8 top-8 cursor-pointer hover:text-red-600 transition">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </div>
+
+                    <x-svg.reading-book-while-sit class="mb-8 mx-auto" />
+
+                    <h3 class="mb-2 text-2xl font-bold text-gray-800">
+                        Beri rating untuk buku ini!
+                    </h3>
+                    <p class="text-gray-500">
+                        Jika kamu sudah membaca buku ini, berikan tanggapan kamu mengenai buku ini.
+                    </p>
+
+                    <div class="mt-6 flex justify-center gap-x-3" x-data="{ liked: false, disliked: false }">
+                        <div class="text-primary">
+                            <flux:tooltip content="Suka">
+                                <button id="like-button"
+                                    x-on:click="liked = !liked; $wire.likeBook(); setTimeout(() => {ratingModal = false}, 1000);"
+                                    tooltip="Suka"
+                                    class="bg-primary/15 px-3 py-2 h-full flex gap-2 items-center justify-center rounded-md cursor-pointer">
+                                    <flux:icon.hand-thumb-up x-show="liked" variant="solid" class="animate-like" />
+                                    <flux:icon.hand-thumb-up x-show="!liked" variant="outline" />
+                                    <p class="font-bold">Suka</p>
+                                </button>
+                            </flux:tooltip>
+                        </div>
+                        <div class="text-red-500">
+                            <flux:tooltip content="Kurang Suka">
+                                <button
+                                    x-on:click="disliked = !disliked; $wire.dislikeBook(); setTimeout(() => {ratingModal = false}, 1000);"
+                                    tooltip="Suka"
+                                    class="bg-red-50 px-3 py-2 h-full flex gap-2 items-center justify-center rounded-md cursor-pointer">
+                                    <flux:icon.hand-thumb-down x-show="disliked" variant="solid" />
+                                    <flux:icon.hand-thumb-down x-show="!disliked" variant="outline" />
+                                    <p class="font-bold">Kurang</p>
+                                </button>
+                            </flux:tooltip>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <section class="flex flex-col min-h-full gap-3 p-5 rounded-lg bg-[#FBFBFB] shadow-lg">
 
@@ -28,7 +88,7 @@
             @if (!$borrowings->isEmpty())
                 <table class="table-auto w-full min-w-20 text-base">
                     <thead
-                        class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-20 before:absolute before:inset-0 before:bg-[#E9E0FF] before:rounded-md before:-z-10">
+                        class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-10 before:absolute before:inset-0 before:bg-[#E9E0FF] before:rounded-md before:-z-10">
                         <tr class="*:font-semibold *:text-primary">
                             <th class="px-3 py-3 whitespace-nowrap pl-4">ID</th>
                             <th class="px-3 py-3 whitespace-nowrap">Judul Buku</th>
