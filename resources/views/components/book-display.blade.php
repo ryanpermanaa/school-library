@@ -1,6 +1,10 @@
-@props(['book'])
+@props(['book', 'isLast' => false])
 <div
-    {{ $attributes->merge(['class' => 'relative flex flex-col min-h-full rounded-xl shadow-sm hover:shadow-xl transition hover:-translate-y-2 group']) }}>
+    {{ $attributes->merge([
+        'class' =>
+            'relative flex flex-col min-h-full rounded-xl shadow-sm hover:shadow-xl transition hover:-translate-y-2 group' .
+            ($isLast ? ' lg:hidden xl:flex' : ''),
+    ]) }}>
 
     @if ($book->created_at >= now()->subWeek())
         <span class="new-badge"></span>

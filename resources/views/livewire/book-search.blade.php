@@ -1,24 +1,24 @@
 <div class="">
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit mb-4 shadow-lg">
 
-        <div class="flex flex-col min-[75rem]:flex-row gap-2 mb-5">
-            {{-- <form action="" class="flex gap-1 h-full w-full"> --}}
-            <div class="relative w-full rounded-sm">
-                <label for="Search" class="sr-only"> Search </label>
-                <input type="text" wire:model.change="key" name="key" id="Search"
-                    placeholder="Cari buku kesukaan anda"
-                    class="w-full h-full rounded-md bg-[#EEEDEF] px-3 shadow-xs sm:text-sm focus:outline-none" />
+        <div class="flex flex-col md:flex-row gap-2 mb-5">
+            <div class="flex gap-1 h-full w-full">
+                <div class="relative w-full rounded-sm">
+                    <label for="Search" class="sr-only"> Search </label>
+                    <input type="text" wire:model.change="key" name="key" id="Search"
+                        placeholder="Cari buku kesukaan anda"
+                        class="w-full h-full rounded-md bg-[#EEEDEF] px-3 shadow-xs sm:text-sm focus:outline-none" />
 
-                @if ($key)
-                    <button wire:click="resetSearch"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer group">
-                        <i class="fa-solid fa-xmark group-hover:text-primary"></i>
-                    </button>
-                @endif
+                    @if ($key)
+                        <button wire:click="resetSearch"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer group">
+                            <i class="fa-solid fa-xmark group-hover:text-primary"></i>
+                        </button>
+                    @endif
+                </div>
+                <flux:button type="submit" icon="magnifying-glass"
+                    class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
             </div>
-            <flux:button type="submit" icon="magnifying-glass"
-                class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
-            {{-- </form> --}}
 
             <div class="flex flex-col md:flex-row gap-1">
                 <div class="flex-1 lg:w-44">

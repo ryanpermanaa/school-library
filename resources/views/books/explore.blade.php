@@ -13,7 +13,7 @@
     </x-page-header>
 
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg mb-3">
-        <div class="flex items-center justify-between mb-3">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Buku-buku populer</h2>
             <a href="{{ route('book.search') }}?sort=paling+populer"
                 class="text-sm text-primary font-bold flex items-center gap-2 group">
@@ -24,16 +24,16 @@
 
         <flux:separator class="mb-5" />
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
             @forelse ($popular_books as $book)
-                <x-book-display :$book />
+                <x-book-display :$book :isLast="$loop->last ? true : false" />
             @empty
                 <p>Tidak ada buku ditemukkan</p>
             @endforelse
         </div>
     </section>
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
-        <div class="flex items-center justify-between mb-3">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-3">
             <h2 class="font-extrabold text-xl">Terbaru ditambahkan</h2>
             <a href="{{ route('book.search') }}?sort=terbaru"
                 class="text-sm text-primary font-bold flex items-center gap-2 group">
@@ -44,9 +44,9 @@
 
         <flux:separator class="mb-5" />
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 [&>div]:bg-[#E0E0E0]">
             @foreach ($latest_books as $book)
-                <x-book-display :$book />
+                <x-book-display :$book :isLast="$loop->last ? true : false" />
             @endforeach
         </div>
     </section>
