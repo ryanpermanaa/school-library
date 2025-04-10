@@ -20,17 +20,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([CategorySeeder::class, BookSeeder::class]);
-
-        DB::table('book_likes')->insert([
-            "user_id" => 1,
-            "book_id" => 4,
-            "created_at" => now()
-        ]);
-
-        DB::table('book_saves')->insert([
-            "user_id" => 1,
-            "book_id" => 4,
-            "created_at" => now()
-        ]);
     }
 }
