@@ -28,11 +28,11 @@
             </span>
             <flux:separator vertical />
             <span
-                class="w-fit inline-flex items-center justify-center rounded-full {{ $book->is_available ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
+                class="w-fit inline-flex items-center justify-center rounded-full {{ $book->status === 'available' ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
                 <i
-                    class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark text-[10px]' }} text-[8px] mr-1.5"></i>
+                    class="{{ $book->status === 'available' ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark text-[10px]' }} text-[8px] mr-1.5"></i>
                 <p class="text-sm font-regular whitespace-nowrap">
-                    {{ $book->is_available ? 'Tersedia' : 'Dipinjam' }}
+                    {{ $book->status === 'available' ? 'Tersedia' : 'Dipinjam' }}
                 </p>
             </span>
         </div>

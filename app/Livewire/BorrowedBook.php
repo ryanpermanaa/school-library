@@ -23,11 +23,6 @@ class BorrowedBook extends Component
         try {
             $borrowment->update([
                 'returned_at' => now(),
-                'status' => 'returned'
-            ]);
-
-            $borrowment->book->update([
-                'is_available' => true
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to return book: ' . $e->getMessage());

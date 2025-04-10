@@ -51,7 +51,7 @@ class SavedBook extends Component
             ->when($this->statusType, function ($query) {
                 if ($this->statusType === 'dipinjam') {
                     $query->whereHas('currentBorrowing');
-                } else {
+                } else if ($this->statusType === 'tersedia') {
                     $query->whereDoesntHave('currentBorrowing');
                 }
             })

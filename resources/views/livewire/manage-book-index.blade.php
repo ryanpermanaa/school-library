@@ -70,6 +70,40 @@
 
     <section class="px-5 py-6 rounded-lg bg-[#FBFBFB] w-full h-fit shadow-lg">
 
+        <div class="flex flex-col md:flex-row gap-2 mb-5">
+            <div class="flex gap-1 h-full w-full">
+                <div class="relative w-full rounded-sm">
+                    <label for="Search" class="sr-only"> Search </label>
+                    <input type="text" wire:model.change="key" name="key" id="Search" placeholder="Cari buku"
+                        class="w-full h-full rounded-md bg-[#EEEDEF] px-3 shadow-xs sm:text-sm focus:outline-none" />
+
+                    @if ($key)
+                        <button wire:click="resetSearch"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer group">
+                            <i class="fa-solid fa-xmark group-hover:text-primary"></i>
+                        </button>
+                    @endif
+                </div>
+                <flux:button type="submit" icon="magnifying-glass"
+                    class="transition! aspect-square! bg-primary! text-white! min-h-full! cursor-pointer! hover:bg-[#51358F]!" />
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-1">
+                <div class="flex-1 lg:w-44">
+                    <x-select :options="$categories" type="multi-select" :entangle="'selectedCategories'" placeholder="Pilih Kategori"
+                        name="category" />
+                </div>
+                <div class="flex-1 lg:w-50">
+                    <x-select :options="['Terbaru', 'Terlama', 'Paling Populer', 'Terbanyak Disimpan']" type="single-select" :entangle="'sortType'" name="sortType"
+                        placeholder="Urutkan Pencarian" />
+                </div>
+                <div class="flex-1 lg:w-44">
+                    <x-select :options="['Tersedia', 'Dipinjam', 'Terlambat']" type="single-select" :entangle="'statusType'" name="statusType"
+                        placeholder="Status Buku" />
+                </div>
+            </div>
+        </div>
+
         <div class="mb-4">
             {{ $books->links(data: ['scrollTo' => false]) }}
         </div>
@@ -79,6 +113,17 @@
             // 'flex justify-center items-center' => $borrowings->isEmpty(),
         ])>
             <table class="table-auto w-full text-base">
+
+                <colgroup>
+                    <col>
+                    <col class="min-w-[22rem]">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+
                 <thead
                     class="sticky top-0 rounded-lg ltr:text-left rtl:text-right z-10 before:absolute before:inset-0 before:bg-[#F0EBFD] before:rounded-tl-md rounded-tr-md before:-z-10">
                     <tr class="*:font-semibold *:text-primary text-base">

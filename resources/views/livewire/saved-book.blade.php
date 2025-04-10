@@ -61,11 +61,11 @@
                         </flux:button>
 
                         <span
-                            class="w-fit inline-flex items-center justify-center rounded-full {{ $book->is_available ? 'text-green-600' : 'text-red-600' }} px-2">
+                            class="w-fit inline-flex items-center justify-center rounded-full {{ $book->status === 'available' ? 'text-green-600' : 'text-red-600' }} px-2">
                             <i
-                                class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark text-[10px]' }} text-[8px] mr-1.5"></i>
+                                class="{{ $book->status === 'available' ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark text-[10px]' }} text-[8px] mr-1.5"></i>
                             <p class="text-base italic font-semibold whitespace-nowrap">
-                                {{ $book->is_available ? 'Tersedia' : 'Dipinjam' }}
+                                {{ $book->status === 'available' ? 'Tersedia' : 'Dipinjam' }}
                             </p>
                         </span>
                     </div>

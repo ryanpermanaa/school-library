@@ -52,11 +52,11 @@
                     <td>Status</td>
                     <td>
                         <span
-                            class="w-fit inline-flex items-center justify-center rounded-full {{ $book->is_available ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
+                            class="w-fit inline-flex items-center justify-center rounded-full {{ $book->status === 'available' ? 'bg-green-200' : 'bg-gray-200' }} px-2.5 py-0.5 text-black">
                             <i
-                                class="{{ $book->is_available ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark' }} text-[8px] mr-1.5"></i>
+                                class="{{ $book->status === 'available' ? 'fa-solid fa-circle-dot' : 'fa-solid fa-xmark' }} text-[8px] mr-1.5"></i>
                             <p class="text-sm font-semibold whitespace-nowrap">
-                                {{ $book->is_available ? 'Tersedia' : 'Dipinjam' }}
+                                {{ $book->status === 'available' ? 'Tersedia' : 'Dipinjam' }}
                             </p>
                         </span>
                     </td>
@@ -67,7 +67,7 @@
             </table>
 
             <div class="flex justify-center md:justify-start gap-3 h-10" x-data="{ borrowed: @js($isCurrentUserBorrowing) }">
-                @if ($book->is_available || $isCurrentUserBorrowing)
+                @if ($book->status === 'available' || $isCurrentUserBorrowing)
                     <button x-cloak @click="borrowed = !borrowed; runConfetti(borrowed); $wire.borrowBook()"
                         x-bind:disabled="borrowed" @disabled($isCurrentUserBorrowing)
                         class="relative text-primary bg-[#462e7a] w-44 rounded-md transition group">

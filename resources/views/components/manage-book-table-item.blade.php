@@ -1,16 +1,6 @@
 @props(['book', 'isLast' => false])
 
 <tr class="*:text-gray-900">
-    <colgroup>
-        <col>
-        <col class="min-w-[25rem]">
-        <col>
-        <col>
-        <col>
-        <col>
-        <col>
-    </colgroup>
-
     <td class="px-3 py-2 whitespace-nowrap pl-4 text-center opacity-40">{{ $book->id }}</td>
 
     {{-- ? Book Description --}}
@@ -33,8 +23,8 @@
     <td class="px-3 py-2 whitespace-nowrap">
         @php
             $hasNeverBorrowed = $book->borrowings->isEmpty();
-            $isAvailable = $book->is_available;
-            $isOverdue = \Carbon\Carbon::parse($book->currentBorrowing?->due_date)->lessThan(now());
+            $isAvailable = $book->status === 'available';
+            $isOverdue = $book->status === 'overdue';
 
             $returnedDate = Carbon\Carbon::parse($book->borrowings->first()?->returned_at)->translatedFormat('d/m/Y');
             $currentBorrowing = $book->currentBorrowing;
@@ -107,12 +97,6 @@
     <td class="px-3 py-2 whitespace-nowrap">
         @if ($currentBorrowing !== null)
             <div class="flex items-center gap-2">
-                <span class="relative flex h-8 aspect-square shrink-0 overflow-hidden rounded-xs">
-                    <span
-                        class="flex font-bold h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                        {{ $book->currentBorrowing->user->initials() }}
-                    </span>
-                </span>
                 <div class="">
                     <h4 class="text-base/tight font-semibold">{{ $book->currentBorrowing->user->name }}</h4>
                     <p class="text-xs/tight opacity-70">
@@ -128,7 +112,7 @@
     <td class="px-3 py-2 whitespace-nowrap">
         @if ($currentBorrowing !== null)
             <flux:tooltip content="{{ \Carbon\Carbon::parse($currentBorrowing->due_date)->diffForHumans() }}">
-                <p>{{ \Carbon\Carbon::parse($currentBorrowing->due_date)->translatedFormat('l, j F Y') }}</p>
+                <p>{{ \Carbon\Carbon::parse($currentBorrowing->due_date)->translatedFormat('j F Y') }}</p>
             </flux:tooltip>
         @else
             -

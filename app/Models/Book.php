@@ -14,7 +14,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'description', 'cover_path', 'category_id', 'likes_count', 'saves_count'];
+    protected $fillable = ['title', 'author', 'description', 'cover_path', 'category_id'];
 
     public function borrowings(): HasMany
     {
@@ -26,9 +26,15 @@ class Book extends Model
         return $this->hasOne(Borrowing::class)->whereNull('returned_at');
     }
 
-    public function getIsAvailableAttribute()
+    public function getStatusAttribute()
     {
-        return $this->currentBorrowing === null;
+        if (!$this->currentBorrowing) {
+            return 'available';
+        }
+
+        return now()->greaterThan($this->currentBorrowing->due_date)
+            ? 'overdue'
+            : 'borrowed';
     }
 
     public function likedByUsers(): BelongsToMany
@@ -49,6 +55,13 @@ class Book extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function scopeOverdue(Builder $query)
+    {
+        $query->whereHas('currentBorrowing', function ($e) {
+            $e->where('due_date', '<', now());
+        });
     }
 
     public function scopePopular(Builder $query)
