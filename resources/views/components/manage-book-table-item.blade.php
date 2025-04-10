@@ -1,6 +1,16 @@
 @props(['book', 'isLast' => false])
 
 <tr class="*:text-gray-900">
+    <colgroup>
+        <col>
+        <col class="min-w-[25rem]">
+        <col>
+        <col>
+        <col>
+        <col>
+        <col>
+    </colgroup>
+
     <td class="px-3 py-2 whitespace-nowrap pl-4 text-center opacity-40">{{ $book->id }}</td>
 
     {{-- ? Book Description --}}
