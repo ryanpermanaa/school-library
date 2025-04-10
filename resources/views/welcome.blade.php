@@ -188,17 +188,19 @@
                 Membaca membuka wawasan dan membawa Anda ke dunia tanpa batas. Temukan inspirasi dalam setiap halaman.
             </p>
 
-            <ul class="mt-6 flex flex-wrap text-secondary text-xl font-crimson justify-center gap-6 md:gap-8">
-                <li>
-                    <a class="hover:underline" href="{{ route('login') }}"> Log In </a>
-                </li>
-                /
-                <li>
-                    <a class="hover:underline" href="{{ route('register') }}"> Daftar </a>
-                </li>
-            </ul>
+            @guest
+                <ul class="mt-6 flex flex-wrap text-secondary text-xl font-crimson justify-center gap-6 md:gap-8">
+                    <li>
+                        <a class="hover:underline" href="{{ route('login') }}"> Log In </a>
+                    </li>
+                    /
+                    <li>
+                        <a class="hover:underline" href="{{ route('register') }}"> Daftar </a>
+                    </li>
+                </ul>
+            @endguest
 
-            <ul class="mt-12 flex justify-center gap-4 text-custom-white [&_a]:transition [&_a]:hover:text-secondary">
+            <ul class="mt-8 flex justify-center gap-4 text-custom-white [&_a]:transition [&_a]:hover:text-secondary">
                 <li>
                     <a href="https://www.instagram.com/ryanproductions_/" rel="noreferrer" target="_blank"
                         class="text-2xl">
