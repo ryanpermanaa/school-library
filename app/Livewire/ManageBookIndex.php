@@ -159,7 +159,7 @@ class ManageBookIndex extends Component
         $categories = Category::pluck('name')->toArray();
 
         $books = Book::query()
-            ->with(['likedByUsers', 'savedByUsers', 'category', 'borrowings', 'currentBorrowing.user'])
+            ->with(['likedByUsers', 'dislikedByUsers', 'savedByUsers', 'category', 'borrowings', 'currentBorrowing.user'])
             ->when($this->key, fn($query) => $query->where("title", "like", "%{$this->key}%"))
             ->when($this->selectedCategories, fn($query) => $query->whereHas(
                 "category",
