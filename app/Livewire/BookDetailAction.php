@@ -49,7 +49,6 @@ class BookDetailAction extends Component
 
         $user = Auth::user();
         $user->load('dislikedBooks')->savedBooks()->toggle($this->book->id);
-        $user->load('likedBooks')->likedBooks()->toggle($this->book->id);
     }
 
     public function borrowBook()
