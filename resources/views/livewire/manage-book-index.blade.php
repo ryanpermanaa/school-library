@@ -22,7 +22,8 @@
 
     </x-alert>
 
-    <div x-cloak x-show="deleteModal" x-transition.opacity class="fixed left-[240px] inset-0 text-white bg-black/20 z-20">
+    <div x-cloak x-show="deleteModal" x-transition.opacity
+        class="fixed md:left-[240px] inset-0 text-white bg-black/20 z-30">
         <div x-show="deleteModal" x-transition
             class="flex h-screen items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <div
