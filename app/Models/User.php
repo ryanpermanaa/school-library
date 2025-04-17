@@ -64,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function borrowings(): HasMany
     {
-        return $this->hasMany(Borrowing::class);
+        return $this->hasMany(Borrowing::class)->whereNull('returned_at');
     }
 
     public function likedBooks(): BelongsToMany

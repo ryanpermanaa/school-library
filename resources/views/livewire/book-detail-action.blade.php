@@ -8,8 +8,8 @@
         </x-alert-item>
 
         <x-alert-item type="error" x-show="result === false && !hideAlert">
-            <x-slot:title>Buku gagal dipinjam :(</x-slot:title>
-            <x-slot:description>Coba lagi nanti atau hubungi developer.</x-slot:description>
+            <x-slot:title> {{ $alertTitle ?? 'Buku gagal dipinjam :(' }}</x-slot:title>
+            <x-slot:description> {{ $alertDescription ?? 'Coba lagi nanti atau hubungi developer.' }} </x-slot:description>
         </x-alert-item>
 
     </x-alert>
@@ -67,9 +67,9 @@
             </table>
 
             <div class="flex justify-center md:justify-start gap-3 h-10" x-data="{ borrowed: @js($isCurrentUserBorrowing) }">
-                @if ($book->status === 'available' || $isCurrentUserBorrowing)
+                @if (($book->status === 'available' || $isCurrentUserBorrowing) && !$limitReach)
                     <button x-cloak @click="borrowed = !borrowed; runConfetti(borrowed); $wire.borrowBook()"
-                        x-bind:disabled="borrowed" @disabled($isCurrentUserBorrowing)
+                        x-bind:disabled="borrowed"
                         class="relative text-primary bg-[#462e7a] w-44 rounded-md transition group">
 
                         <span
@@ -83,13 +83,22 @@
                         </span>
 
                     </button>
-                @else
+                @elseif ($book->status === 'borrowed' && !$isCurrentUserBorrowing)
                     <button x-cloak class="relative bg-gray-900 w-44 rounded-md transition group">
                         <span
                             class="font-bold text-md absolute inset-0 flex justify-center items-center rounded-md text-custom-white bg-gray-600 border-3 border-gray-600 cursor-not-allowed -translate-y-1.5 transition group-active:translate-y-0">
                             Buku Dipinjam :(
                         </span>
                     </button>
+                @elseif ($limitReach)
+                    <flux:tooltip content="Peminjaman buku sudah menyentuh batas maksimal">
+                        <button x-cloak class="relative h-full bg-gray-400 w-44 rounded-md transition group">
+                            <span
+                                class="font-bold text-md absolute inset-0 flex justify-center items-center rounded-md text-gray-500 bg-gray-300 border-3 border-gray-400 cursor-not-allowed -translate-y-1.5 transition group-active:translate-y-0">
+                                Limit Tercapai
+                            </span>
+                        </button>
+                    </flux:tooltip>
                 @endif
                 <div class="flex gap-2" x-data="{ liked: @js($isLiked), saved: @js($isSaved) }">
 

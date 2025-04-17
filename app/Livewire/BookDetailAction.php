@@ -12,7 +12,8 @@ class BookDetailAction extends Component
 {
     public $book;
     public $isLiked, $isSaved, $isCurrentUserBorrowing;
-    public $borrowSuccess;
+    public $limitReach;
+    public $borrowSuccess, $alertTitle, $alertDescription;
     public $initialPreviousUrl;
 
     public function mount($book)
@@ -22,6 +23,7 @@ class BookDetailAction extends Component
         $this->isSaved = Auth::user()->savedBooks->contains($book->id);
 
         $this->initialPreviousUrl = request()->headers->get('referer') ?? route('home');
+        $this->limitReach = Auth::user()->borrowings->count() >= 3;
 
         if ($book->currentBorrowing) {
             $this->isCurrentUserBorrowing = $book->currentBorrowing->user_id == Auth::user()->id;
@@ -42,7 +44,6 @@ class BookDetailAction extends Component
         $user->load('dislikedBooks')->dislikedBooks()->toggle($this->book->id);
     }
 
-
     public function saveBook()
     {
         if (!Auth::check()) return;
@@ -56,6 +57,15 @@ class BookDetailAction extends Component
         if (!Auth::check()) return;
 
         $user = Auth::user()->load(['borrowings']);
+
+        if ($user->borrowings->count() == 3) {
+            $this->limitReach = true;
+
+            $this->borrowSuccess = false;
+            $this->alertTitle = "Tidak bisa meminjam buku.";
+            $this->alertDescription = "Jumlah pinjaman buku sudah mencapai batas";
+            return;
+        }
 
         try {
             Borrowing::create([
