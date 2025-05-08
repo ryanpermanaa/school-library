@@ -19,7 +19,7 @@ class DashboardAction extends Component
         $overdueBooksCount = 0;
 
         foreach ($books as $book) {
-            if ($book->status === 'overdue') $this->overdueBooksCount++;
+            if ($book->status === 'overdue') $overdueBooksCount++;
         }
 
         $borrowedTodayCount = 0;

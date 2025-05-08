@@ -44,62 +44,74 @@
         }
     </script>
     <script>
-        var chart = document.querySelector('#chartline')
+        var chart = document.querySelector("#chartline");
+
+        var dates = [];
+        var now = new Date();
+
+        for (let i = 0; i < 30; i++) {
+            let date = new Date(now);
+            date.setDate(now.getDate() - i);
+
+            dates.unshift({
+                x: date.getTime(),
+                y: Math.floor(Math.random() * 100) //todo: Change to real borrowing value
+            });
+        }
+
         var options = {
             series: [{
-                name: 'TEAM A',
-                type: 'area',
-                data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33]
-            }, {
-                name: 'TEAM B',
-                type: 'line',
-                data: [55, 69, 45, 61, 43, 54, 37, 52, 44, 61, 43]
+                name: 'Buku Dipinjam',
+                data: dates
             }],
             chart: {
+                type: 'area',
+                stacked: false,
                 height: 350,
-                type: 'line',
                 zoom: {
-                    enabled: false
+                    type: 'x',
+                    enabled: true,
+                    autoScaleYaxis: true
+                },
+                toolbar: {
+                    autoSelected: 'zoom'
                 }
             },
             stroke: {
-                curve: 'smooth'
+                colors: ['#7353ba'],
+                width: 3
+            },
+            dataLabels: {
+                enabled: false
+            },
+            markers: {
+                size: 0,
+            },
+            title: {
+                text: 'Statistik Peminjaman Buku',
+                align: 'left'
             },
             fill: {
-                type: 'solid',
-                opacity: [0.35, 1],
-            },
-            labels: ['Dec 01', 'Dec 02', 'Dec 03', 'Dec 04', 'Dec 05', 'Dec 06', 'Dec 07', 'Dec 08', 'Dec 09 ',
-                'Dec 10', 'Dec 11'
-            ],
-            markers: {
-                size: 0
-            },
-            yaxis: [{
-                    title: {
-                        text: 'Series A',
-                    },
+                type: 'gradient',
+                colors: ['#7353ba'],
+                gradient: {
+                    shadeIntensity: 1,
+                    inverseColors: false,
+                    opacityFrom: 0.5,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
                 },
-                {
-                    opposite: true,
-                    title: {
-                        text: 'Series B',
-                    },
+            },
+            yaxis: {
+                title: {
+                    text: 'Jumlah Buku'
                 },
-            ],
-            tooltip: {
-                shared: true,
-                intersect: false,
-                y: {
-                    formatter: function(y) {
-                        if (typeof y !== "undefined") {
-                            return y.toFixed(0) + " points";
-                        }
-                        return y;
-                    }
-                }
-            }
+            },
+            xaxis: {
+                type: 'datetime',
+            },
         };
+
         var chart = new ApexCharts(chart, options);
         chart.render();
     </script>
