@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Book;
 use App\Models\Borrowing;
 use App\Models\User;
+use App\Stats\BorrowingStats;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -28,7 +29,16 @@ class DashboardAction extends Component
             if (Carbon::parse($borrowment)->greaterThan(today())) $borrowedTodayCount++;
         }
 
+        //? Stats
+
+        $borrowingStats = BorrowingStats::query()
+            ->start(now()->subMonth())
+            ->end(now()->subSecond())
+            ->groupByDay()
+            ->get();
+
         return view('livewire.dashboard-action', [
+            'borrowingStats' => $borrowingStats->pluck('value'),
             'books' => $books,
             'user_count' => $user_count,
             'overdueBooksCount' => $overdueBooksCount,

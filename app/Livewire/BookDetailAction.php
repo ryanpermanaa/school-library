@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Borrowing;
+use App\Stats\BorrowingStats as StatsBorrowingStats;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -74,6 +75,8 @@ class BookDetailAction extends Component
                 'borrowed_at' => now(),
                 'due_date' => now()->addWeek(),
             ]);
+
+            StatsBorrowingStats::increase(1);
         } catch (\Exception $e) {
             Log::error('Failed to borrow book: ' . $e->getMessage());
             $this->borrowSuccess = false;
