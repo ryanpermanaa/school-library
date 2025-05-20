@@ -38,7 +38,6 @@
             } elseif (!$isAvailable) {
                 $status = 'borrowed';
             }
-
         @endphp
 
         <div class="relative w-fit" x-data="{ openTooltip: false }" @click.outside="openTooltip = false">
