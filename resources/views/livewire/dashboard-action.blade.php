@@ -1,8 +1,8 @@
 <div class="">
 
-    <div class="mb-4 rounded-md bg-[#f1f1f1] p-3">
+    <div class="rounded-md bg-[#f1f1f1] p-3">
         <div class="">
-            <div class="flex flex-col md:flex-row w-full gap-3 mt-5">
+            <div class="flex flex-col md:flex-row w-full gap-3 mt-2">
                 <div
                     class="transform flex-1 hover:-translate-y-2 transition rounded-md duration-300 shadow-md hover:shadow-xl bg-white">
                     <div class="p-5">
@@ -82,7 +82,7 @@
                     </a>
                 </div>
             </div>
-            <div class="mt-5">
+            <div class="mt-5 mb-2">
                 <div class="grid gap-3 grid-cols-1 lg:grid-cols-2">
                     <div class="bg-white shadow-lg p-4 rounded-xl" id="chartline"></div>
                     <div class="bg-white shadow-lg p-4 min-h-20 flex justify-center items-center rounded-xl"
@@ -90,25 +90,25 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
+            {{-- <div class="mt-5">
+                <div class="grid gap-2 grid-cols-1 lg:grid-cols-1" x-data="{ userTab: false, adminTab: false }">
                     <div class="bg-white p-4 shadow-lg rounded-lg">
                         <div>
                             <div class="hidden sm:block">
                                 <div class="border-b border-gray-200">
                                     <nav class="-mb-px flex gap-4" aria-label="Tabs">
-                                        <a href="#"
-                                            class="inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-4 text-sm font-medium {{ request()->routeIs('') }} border-sky-500 text-sky-600"
+                                        <button
+                                            class="border-primary text-primary inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-3 text-sm font-medium"
                                             aria-current="page">
                                             <i class="fa-solid fa-users"></i>
-                                            Users
-                                        </a>
-                                        <a href="#"
-                                            class="inline-flex shrink-0 items-center gap-2 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
+                                            User
+                                        </button>
+                                        <button
+                                            class="inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-3 text-sm font-medium"
                                             aria-current="page">
                                             <i class="fa-solid fa-user-tie"></i>
-                                            Admins
-                                        </a>
+                                            Admin
+                                        </button>
                                     </nav>
                                 </div>
                             </div>
@@ -126,13 +126,13 @@
                                                         <th
                                                             class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                                             <div class="flex cursor-pointer">
-                                                                <span class="mr-2">PRODUCT NAME</span>
+                                                                <span class="mr-2">Username</span>
                                                             </div>
                                                         </th>
                                                         <th
                                                             class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                                             <div class="flex cursor-pointer">
-                                                                <span class="mr-2">Stock</span>
+                                                                <span class="mr-2">Email Diverifikasi</span>
                                                             </div>
                                                         </th>
                                                         <th
@@ -207,7 +207,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <script>
