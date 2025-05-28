@@ -8,4 +8,5 @@
     </x-page-header>
 
     @livewire('dashboard-action')
+
 </x-layouts.app>

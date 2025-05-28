@@ -47,7 +47,7 @@
                                 <p class="text-md text-gray-500">
                                     Apakah anda yakin untuk menghapus buku dengan judul
                                     "<span class="font-medium whitespace-nowrap" x-text="bookTitle"></span>"
-                                    dari data?
+                                    dari data? Semua data peminjaman juga akan dihapus.
                                 </p>
                             </div>
                         </div>

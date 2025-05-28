@@ -1,5 +1,24 @@
 @props(['book', 'isLast' => false])
 
+@php
+    $hasNeverBorrowed = $book->borrowings->isEmpty();
+    $isAvailable = $book->status === 'available';
+    $isOverdue = $book->status === 'overdue';
+
+    $returnedDate = Carbon\Carbon::parse($book->borrowings->first()?->returned_at)->translatedFormat('d/m/Y');
+    $currentBorrowing = $book->currentBorrowing;
+
+    if ($hasNeverBorrowed) {
+        $status = 'never';
+    } elseif ($isAvailable) {
+        $status = 'available';
+    } elseif ($isOverdue) {
+        $status = 'overdue';
+    } elseif (!$isAvailable) {
+        $status = 'borrowed';
+    }
+@endphp
+
 <tr class="*:text-gray-900">
     <td class="px-3 py-2 whitespace-nowrap pl-4 text-center opacity-40">{{ $book->id }}</td>
 
@@ -21,24 +40,6 @@
 
     {{-- ? Book Status --}}
     <td class="px-3 py-2 whitespace-nowrap">
-        @php
-            $hasNeverBorrowed = $book->borrowings->isEmpty();
-            $isAvailable = $book->status === 'available';
-            $isOverdue = $book->status === 'overdue';
-
-            $returnedDate = Carbon\Carbon::parse($book->borrowings->first()?->returned_at)->translatedFormat('d/m/Y');
-            $currentBorrowing = $book->currentBorrowing;
-
-            if ($hasNeverBorrowed) {
-                $status = 'never';
-            } elseif ($isAvailable) {
-                $status = 'available';
-            } elseif ($isOverdue) {
-                $status = 'overdue';
-            } elseif (!$isAvailable) {
-                $status = 'borrowed';
-            }
-        @endphp
 
         <div class="relative w-fit" x-data="{ openTooltip: false }" @click.outside="openTooltip = false">
 

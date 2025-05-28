@@ -1,4 +1,73 @@
-<div class="">
+<div class="" x-data="{ deleteModal: false, username: '' }">
+
+    <x-alert model="returnSuccess">
+
+        <x-alert-item type="success" x-show="result === true && !hideAlert">
+            <x-slot:title>
+                {{ $alertTitle ?? 'Buku berhasil dikembalikan!' }}
+            </x-slot:title>
+            <x-slot:description>
+                {{ $alertDescription ?? 'Buku berhasil dikembalikan ke perpustakaan.' }}
+            </x-slot:description>
+        </x-alert-item>
+
+        <x-alert-item type="error" x-show="result === false && !hideAlert">
+            <x-slot:title>
+                {{ $alertTitle ?? 'Buku gagal dikembalikan :(' }}
+            </x-slot:title>
+            <x-slot:description>
+                {{ $alertDescription ?? 'Coba lagi nanti atau hubungi developer.' }}
+            </x-slot:description>
+        </x-alert-item>
+
+    </x-alert>
+
+    <div x-cloak x-show="deleteModal" x-transition.opacity
+        class="fixed md:left-[240px] inset-0 text-white bg-black/20 z-30">
+        <div x-show="deleteModal" x-transition
+            class="flex h-screen items-center justify-center p-4 text-center sm:items-center sm:p-0">
+            <div
+                class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg aria-hidden="true" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                                fill="none" class="h-6 w-6 text-red-600">
+                                <path
+                                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                                    stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 id="modal-title" class="text-lg font-semibold leading-6 text-gray-900">
+                                Penghapusan User
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-md text-gray-500">
+                                    Apakah anda yakin untuk menghapus user dengan nama
+                                    "<span class="font-medium whitespace-nowrap" x-text="username"></span>"
+                                    dari data? Semua data peminjaman user juga akan dihapus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button x-on:click="deleteModal = false" wire:click="deleteUser()"
+                        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto cursor-pointer"
+                        type="button">
+                        Hapus
+                    </button>
+                    <button x-on:click="deleteModal = false"
+                        class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
+                        type="button">
+                        Batal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="rounded-md bg-[#f1f1f1] p-3">
         <div class="">
@@ -90,22 +159,22 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="mt-5">
-                <div class="grid gap-2 grid-cols-1 lg:grid-cols-1" x-data="{ userTab: false, adminTab: false }">
+            <div class="mt-5">
+                <div class="grid gap-2 grid-cols-1 lg:grid-cols-1" x-data="{ userTab: true, adminTab: false }">
                     <div class="bg-white p-4 shadow-lg rounded-lg">
                         <div>
                             <div class="hidden sm:block">
                                 <div class="border-b border-gray-200">
                                     <nav class="-mb-px flex gap-4" aria-label="Tabs">
-                                        <button
-                                            class="border-primary text-primary inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-3 text-sm font-medium"
-                                            aria-current="page">
+                                        <button x-on:click="userTab = true; adminTab = false"
+                                            class="pb-4 inline-flex shrink-0 items-center gap-2 border-b-2 px-1 text-sm font-bold cursor-pointer transition"
+                                            :class="{ 'border-primary text-primary': userTab }" aria-current="page">
                                             <i class="fa-solid fa-users"></i>
                                             User
                                         </button>
-                                        <button
-                                            class="inline-flex shrink-0 items-center gap-2 border-b-2 px-1 pb-3 text-sm font-medium"
-                                            aria-current="page">
+                                        <button x-on:click="userTab = false; adminTab = true"
+                                            class="inline-flex pb-4 shrink-0 items-center gap-2 border-b-2 px-1 text-sm font-bold cursor-pointer transition"
+                                            :class="{ 'border-primary text-primary': adminTab }" aria-current="page">
                                             <i class="fa-solid fa-user-tie"></i>
                                             Admin
                                         </button>
@@ -114,15 +183,22 @@
                             </div>
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-5">
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto">
                                     <div class="py-2 align-middle inline-block min-w-full">
                                         <div
                                             class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
-                                            <table class="min-w-full divide-y divide-gray-200">
+                                            {{-- ? USER --}}
+                                            <table x-show="userTab" class="min-w-full divide-y divide-gray-200">
                                                 <thead>
                                                     <tr>
+                                                        <th
+                                                            class="px-6 py-3 w-[3%] bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <span class="mr-2">ID</span>
+                                                            </div>
+                                                        </th>
                                                         <th
                                                             class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                                             <div class="flex cursor-pointer">
@@ -136,68 +212,216 @@
                                                             </div>
                                                         </th>
                                                         <th
-                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 tracking-wider">
                                                             <div class="flex cursor-pointer">
-                                                                <span class="mr-2">STATUS</span>
+                                                                <flux:tooltip
+                                                                    content="Banyak buku yang pernah dipinjam">
+                                                                    <span class="mr-2 uppercase">Pernah Dipinjam</span>
+                                                                </flux:tooltip>
                                                             </div>
                                                         </th>
                                                         <th
-                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 tracking-wider">
                                                             <div class="flex cursor-pointer">
-                                                                <span class="mr-2">ACTION</span>
+                                                                <flux:tooltip
+                                                                    content="Banyak buku yang pernah terlambat dikembalikan">
+                                                                    <span class="mr-2 uppercase">Pernah
+                                                                        Terlambat</span>
+                                                                </flux:tooltip>
+                                                            </div>
+                                                        </th>
+                                                        <th
+                                                            class="px-6 py-3 w-[15%] bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <span class="mr-2">Aksi</span>
                                                             </div>
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-gray-200">
+
+                                                    @foreach ($regularUsers as $user)
+                                                        <tr>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-md leading-5">
+                                                                <p>#{{ $user->id }}</p>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-md leading-5">
+                                                                <p>{{ $user->name }}</p>
+                                                                <p class="text-xs text-gray-400">{{ $user->email }}
+                                                                </p>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $verified = $user->email_verified_at !== null;
+                                                                @endphp
+
+                                                                <span @class([
+                                                                    'inline-flex items-center space-x-1 px-2.5 py-1 rounded-full',
+                                                                    'bg-green-100 text-green-800' => $verified,
+                                                                    'bg-red-100 text-red-800' => !$verified,
+                                                                ])
+                                                                    @click="openTooltip = !openTooltip">
+                                                                    <i @class([
+                                                                        'text-xs mr-2',
+                                                                        'fa-solid fa-check' => $verified,
+                                                                        'fa-solid fa-xmark' => !$verified,
+                                                                    ])></i>
+
+                                                                    @if ($verified)
+                                                                        <flux:tooltip
+                                                                            content="Diverifikasi {{ \Carbon\Carbon::parse($user->email_verified_at)->diffForHumans() }}">
+                                                                            <p
+                                                                                class="text-xs font-semibold whitespace-nowrap">
+                                                                                Diverifikasi
+                                                                            </p>
+                                                                        </flux:tooltip>
+                                                                    @else
+                                                                        <p
+                                                                            class="text-xs font-semibold whitespace-nowrap">
+                                                                            Belum Diverifikasi
+                                                                        </p>
+                                                                    @endif
+                                                                </span>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $borrowingCount = app\Models\Borrowing::query()
+                                                                        ->where('user_id', $user->id)
+                                                                        ->count();
+                                                                @endphp
+                                                                {{ $borrowingCount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $userOverdueCount = app\Models\Borrowing::query()
+                                                                        ->where('user_id', $user->id)
+                                                                        ->whereColumn('returned_at', '>', 'due_date')
+                                                                        ->count();
+                                                                @endphp
+                                                                {{ $userOverdueCount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                <div class="flex gap-1">
+                                                                    <flux:button
+                                                                        x-on:click="deleteModal = true; username = '{{ $user->name }}'; $wire.selectedUser = {{ $user->id }}"
+                                                                        class="p-1! px-3! font-semibold! cursor-pointer hover:bg-red-400! hover:text-white! transition"
+                                                                        icon="trash">
+                                                                        Hapus User
+                                                                    </flux:button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+                                            {{-- ? ADMIN --}}
+                                            <table x-show="adminTab" class="min-w-full divide-y divide-gray-200">
+                                                <thead>
                                                     <tr>
-                                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                            <p>Apple MacBook Pro 13</p>
-                                                            <p class="text-xs text-gray-400">PC & Laptop
-                                                            </p>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                            <p>77</p>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                            <div class="flex text-green-500">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="w-5 h-5 mr-1" fill="none"
-                                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
-                                                                <p>Active</p>
+                                                        <th
+                                                            class="px-6 py-3 w-[3%] bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <span class="mr-2">ID</span>
                                                             </div>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                            <div class="flex space-x-4">
-                                                                <a href="#"
-                                                                    class="text-blue-500 hover:text-blue-600">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-5 h-5 mr-1" fill="none"
-                                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                                    </svg>
-                                                                    <p>Edit</p>
-                                                                </a>
-                                                                <a href="#"
-                                                                    class="text-red-500 hover:text-red-600">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        class="w-5 h-5 mr-1 ml-3" fill="none"
-                                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                    </svg>
-                                                                    <p>Delete</p>
-                                                                </a>
+                                                        </th>
+                                                        <th
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <span class="mr-2">Username</span>
                                                             </div>
-                                                        </td>
+                                                        </th>
+                                                        <th
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <span class="mr-2">Email Diverifikasi</span>
+                                                            </div>
+                                                        </th>
+                                                        <th
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <flux:tooltip
+                                                                    content="Banyak buku yang pernah dipinjam">
+                                                                    <span class="mr-2 uppercase">Pernah Dipinjam</span>
+                                                                </flux:tooltip>
+                                                            </div>
+                                                        </th>
+                                                        <th
+                                                            class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 tracking-wider">
+                                                            <div class="flex cursor-pointer">
+                                                                <flux:tooltip
+                                                                    content="Banyak buku yang pernah terlambat dikembalikan">
+                                                                    <span class="mr-2 uppercase">Pernah
+                                                                        Terlambat</span>
+                                                                </flux:tooltip>
+                                                            </div>
+                                                        </th>
                                                     </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200">
+
+                                                    @foreach ($adminUsers as $admin)
+                                                        <tr>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-md leading-5">
+                                                                <p>#{{ $admin->id }}</p>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-md leading-5">
+                                                                <p>{{ $admin->name }}</p>
+                                                                <p class="text-xs text-gray-400">{{ $admin->email }}
+                                                                </p>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $verified = $admin->email_verified_at !== null;
+                                                                @endphp
+
+                                                                <span @class([
+                                                                    'inline-flex items-center space-x-1 px-2.5 py-1 rounded-full',
+                                                                    'bg-green-100 text-green-800' => $verified,
+                                                                    'bg-red-100 text-red-800' => !$verified,
+                                                                ])
+                                                                    @click="openTooltip = !openTooltip">
+                                                                    <i @class([
+                                                                        'text-xs mr-2',
+                                                                        'fa-solid fa-check' => $verified,
+                                                                        'fa-solid fa-xmark' => !$verified,
+                                                                    ])></i>
+
+                                                                    @if ($verified)
+                                                                        <flux:tooltip
+                                                                            content="Diverifikasi {{ \Carbon\Carbon::parse($admin->email_verified_at)->diffForHumans() }}">
+                                                                            <p
+                                                                                class="text-xs font-semibold whitespace-nowrap">
+                                                                                Diverifikasi
+                                                                            </p>
+                                                                        </flux:tooltip>
+                                                                    @else
+                                                                        <p
+                                                                            class="text-xs font-semibold whitespace-nowrap">
+                                                                            Belum Diverifikasi
+                                                                        </p>
+                                                                    @endif
+                                                                </span>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $borrowingCount = app\Models\Borrowing::query()
+                                                                        ->where('user_id', $user->id)
+                                                                        ->count();
+                                                                @endphp
+                                                                {{ $borrowingCount }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                @php
+                                                                    $userOverdueCount = app\Models\Borrowing::query()
+                                                                        ->where('user_id', $user->id)
+                                                                        ->whereColumn('returned_at', '>', 'due_date')
+                                                                        ->count();
+                                                                @endphp
+                                                                {{ $userOverdueCount }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -207,46 +431,10 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
 
         <script>
-            function data() {
-
-                return {
-
-                    isSideMenuOpen: false,
-                    toggleSideMenu() {
-                        this.isSideMenuOpen = !this.isSideMenuOpen
-                    },
-                    closeSideMenu() {
-                        this.isSideMenuOpen = false
-                    },
-                    isNotificationsMenuOpen: false,
-                    toggleNotificationsMenu() {
-                        this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen
-                    },
-                    closeNotificationsMenu() {
-                        this.isNotificationsMenuOpen = false
-                    },
-                    isProfileMenuOpen: false,
-                    toggleProfileMenu() {
-                        this.isProfileMenuOpen = !this.isProfileMenuOpen
-                    },
-                    closeProfileMenu() {
-                        this.isProfileMenuOpen = false
-                    },
-                    isPagesMenuOpen: false,
-                    togglePagesMenu() {
-                        this.isPagesMenuOpen = !this.isPagesMenuOpen
-                    },
-
-                }
-            }
-
-
-            // BOOK BORROWMENT LINE CHART
-
             var chart = document.querySelector("#chartline");
 
             var dates = [];
